@@ -1,14 +1,12 @@
 //
 //  main.c
-//  COS431-Project
+//  PBrain-VM
 //
-//  Created by Jake Marsh
+//  by Jake Marsh
 //
 
 // INCLUDE NECESSARY LIBRARIES
 #include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
 #include <errno.h>
 #include <sys/types.h>
@@ -57,17 +55,10 @@ int main(int argc, const char * argv[])
 {
     
     char *ptr ;
-    fp = open("program.txt", O_RDONLY) ; //always check the return value.
-    printf("Open is %d\n", fp) ;
-    
-    if (fp < 0) //error in read or EOF
-    {printf("Bus Error 22\n") ;
-        exit(0) ;
-    }
+    fp = openFile("program.txt", O_RDONLY) ; //always check the return value.
     
     //iterate through the source code to and load it into memory
     
-    int ret = read (fp, input_line, 7 ) ; //returns number of characters read
     int ret = (int) read (fp, input_line, 7 ) ; //returns number of characters read
     
     while (1)
@@ -84,7 +75,6 @@ int main(int argc, const char * argv[])
         
         //read in next line of code
         
-        ret = read (fp, input_line, 7 ) ;
         ret = (int) read (fp, input_line, 7 ) ;
         
         program_line++ ; //now at a new line in the program
