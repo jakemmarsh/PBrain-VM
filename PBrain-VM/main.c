@@ -19,88 +19,81 @@
 
 
 // These variables are associated with the implementation of the VM
-int fp ;
-char *ptr ;
-int i ;
-int j, k ;
-char input_line [7] ;
+int fp;
+char *ptr;
+int i;
+int j, k;
+char input_line [7];
 
 // These are variables representing the VM itself
-char IR[6] ;
-int PC = 0 ;
+char IR[6];
+int PC = 0;
 
 // POINTER REGISTERS
-int P0 ;
-int P1 ;
-int P2 ;
-int P3 ;
+int P0;
+int P1;
+int P2;
+int P3;
 
 // GENERAL PURPOSE REGISTERS
-int R0 ;
-int R1 ;
-int R2 ;
-int R3 ;
+int R0;
+int R1;
+int R2;
+int R3;
 
-int ACC ;
-char PSW[2] ;
+int ACC;
+char PSW[2];
 
 // PROGRAM MEMORY
-char memory [100][6]  ;
+char memory [100][6];
 
 // to keep track of what we're doing
-int opcode ;
-int program_line = 0 ;
+int opcode;
+int program_line = 0;
 
 int main(int argc, const char * argv[])
 {
     
-    char *ptr ;
-    fp = openFile("program.txt", O_RDONLY) ; //always check the return value.
+    char *ptr;
     
-    //iterate through the source code to and load it into memory
+    // call function to open the program file.
+    // call will also check the return value
+    fp = openFile("program.txt", O_RDONLY);
     
-    int ret = (int) read (fp, input_line, 7 ) ; //returns number of characters read
+    // read first line of source code into memory
+    int ret = (int) read (fp, input_line, 7 ); //returns number of characters read
     
+    // iterate through the rest of the source code
     while (1)
     {
         
         if (ret <= 0) //indicates end of file or
-            break ; //breaks out of loop
-        ptr = input_line ; //base address of array
+            break; //breaks out of loop
         
-        //write into Program_memory
+        ptr = input_line; //base address of array
         
-        for (i = 0; i < 6 ; i++)
-            memory[program_line][i] = input_line[i] ;
+        // write into Program_memory
+        for (i = 0; i < 6; i++)
+            memory[program_line][i] = input_line[i];
         
         //read in next line of code
+        ret = (int) read (fp, input_line, 7 );
         
-        ret = (int) read (fp, input_line, 7 ) ;
-        
-        program_line++ ; //now at a new line in the program
+        // increment current line count to keep track
+        program_line++;
     }
     
-    
-    /*We have read in the entire PBRAIN12 program.
-     Now time to execute the code.
-     First, we copy the current line of the program code
-     into the Instruction Register (IR)
-     */
-    
-    for (i = 0 ; i< program_line; i++)
+    // execute all code read in from source
+    for (i = 0; i < program_line; i++)
         
     {
         
-        for (j = 0 ; j < 6 ; j++)
-            IR[j] = memory[i] [j] ;
+        // copy current line into the instruction register (IR)
+        for (j = 0; j < 6; j++)
+            IR[j] = memory[i] [j];
         
-        //get opcode and execute
-        
-        printf("Working on Program line %d\n", i) ;
-        
-        //easy way to calc integer equivalent of chars
-        
-        opcode  = (int) (IR[0] -48) * 10 ;
+        // calculate integer equivalent of opcode chars
+        opcode  = (int) (IR[0] -48) * 10;
         opcode += (int) (IR[1] -48);
         
         /* Now we know the opcode for the instruction. This
@@ -108,6 +101,7 @@ int main(int argc, const char * argv[])
          operands.
          */
         
-        printf("Opcode is %d\n", opcode) ;
+        // execute relevant function for opcode
+
     }
 }
