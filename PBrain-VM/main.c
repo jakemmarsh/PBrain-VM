@@ -21,31 +21,24 @@
 // These variables are associated with the implementation of the VM
 int fp;
 char *ptr;
-int i;
-int j, k;
-char input_line [7];
+int i, j, k;
+char input_line[7];
 
 // These are variables representing the VM itself
 char IR[6];
 int PC = 0;
 
 // POINTER REGISTERS
-int P0;
-int P1;
-int P2;
-int P3;
+int P0, P1, P2, P3;
 
 // GENERAL PURPOSE REGISTERS
-int R0;
-int R1;
-int R2;
-int R3;
+int R0, R1, R2, R3;
 
 int ACC;
 char PSW[2];
 
 // PROGRAM MEMORY
-char memory [100][6];
+char memory[100][6];
 
 // to keep track of what we're doing
 int opcode;
@@ -58,10 +51,10 @@ int main(int argc, const char * argv[])
     
     // call function to open the program file.
     // call will also check the return value
-    fp = openFile("program.txt", O_RDONLY);
+    fp = open_file("program.txt", O_RDONLY);
     
     // read first line of source code into memory
-    int ret = (int) read (fp, input_line, 7 ); //returns number of characters read
+    int ret = (int) read(fp, input_line, 7 ); //returns number of characters read
     
     // iterate through the rest of the source code
     while (1)
@@ -74,13 +67,12 @@ int main(int argc, const char * argv[])
         
         // write into Program_memory
         for (i = 0; i < 6; i++)
-            memory[program_line][i] = input_line[i];
         {
             read_to_memory(memory, program_line, input_line, i);
         }
         
         //read in next line of code
-        ret = (int) read (fp, input_line, 7 );
+        ret = (int) read(fp, input_line, 7 );
         
         // increment current line count to keep track
         program_line++;
@@ -88,12 +80,11 @@ int main(int argc, const char * argv[])
     
     // execute all code read in from source
     for (i = 0; i < program_line; i++)
-        
     {
         
         // copy current line into the instruction register (IR)
         for (j = 0; j < 6; j++)
-            IR[j] = memory[i] [j];
+            IR[j] = memory[i][j];
         
         // calculate integer equivalent of opcode chars
         opcode  = (int) (IR[0] -48) * 10;
