@@ -72,7 +72,7 @@ int main(int argc, const char * argv[])
         }
         
         //read in next line of code
-        ret = (int) read(fp, input_line, 7 );
+        ret = (int) read(fp, input_line, 7);
         
         // increment current line count to keep track
         program_line++;

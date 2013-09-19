@@ -15,7 +15,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-int openFile(const char * fileName, int openType) {
+int open_file(const char * fileName, int openType) {
     int fp;
     
     fp = open(fileName, openType) ; //always check the return value.
