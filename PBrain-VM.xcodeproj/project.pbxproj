@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		307E9B2017EB4CDB00747503 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 307E9B1F17EB4CDB00747503 /* main.c */; };
 		307E9B2217EB4CDB00747503 /* PBrain_VM.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 307E9B2117EB4CDB00747503 /* PBrain_VM.1 */; };
-		30980F0517EB4E5A0081908B /* API.c in Sources */ = {isa = PBXBuildFile; fileRef = 30980F0217EB4E5A0081908B /* API.c */; };
+		30980F0517EB4E5A0081908B /* api.c in Sources */ = {isa = PBXBuildFile; fileRef = 30980F0217EB4E5A0081908B /* api.c */; };
 		30980F0617EB4E5A0081908B /* FileReader.c in Sources */ = {isa = PBXBuildFile; fileRef = 30980F0317EB4E5A0081908B /* FileReader.c */; };
 /* End PBXBuildFile section */
 
@@ -30,10 +30,10 @@
 		307E9B1C17EB4CDB00747503 /* PBrain-VM */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "PBrain-VM"; sourceTree = BUILT_PRODUCTS_DIR; };
 		307E9B1F17EB4CDB00747503 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		307E9B2117EB4CDB00747503 /* PBrain_VM.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = PBrain_VM.1; sourceTree = "<group>"; };
-		30980F0117EB4E5A0081908B /* API.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = API.h; path = "../../COS431-Project/COS431-Project/API.h"; sourceTree = "<group>"; };
-		30980F0217EB4E5A0081908B /* API.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = API.c; path = "../../COS431-Project/COS431-Project/API.c"; sourceTree = "<group>"; };
-		30980F0317EB4E5A0081908B /* FileReader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = FileReader.c; path = "../../COS431-Project/COS431-Project/FileReader.c"; sourceTree = "<group>"; };
-		30980F0417EB4E5A0081908B /* FileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileReader.h; path = "../../COS431-Project/COS431-Project/FileReader.h"; sourceTree = "<group>"; };
+		30980F0117EB4E5A0081908B /* api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = api.h; sourceTree = "<group>"; };
+		30980F0217EB4E5A0081908B /* api.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = api.c; sourceTree = "<group>"; };
+		30980F0317EB4E5A0081908B /* FileReader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = FileReader.c; sourceTree = "<group>"; };
+		30980F0417EB4E5A0081908B /* FileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileReader.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,27 +68,19 @@
 			children = (
 				30980F0817EB4E650081908B /* FileReader */,
 				30980F0717EB4E5D0081908B /* API */,
-				30980F0017EB4D5D0081908B /* FileReader */,
 				307E9B1F17EB4CDB00747503 /* main.c */,
 				307E9B2117EB4CDB00747503 /* PBrain_VM.1 */,
 			);
 			path = "PBrain-VM";
 			sourceTree = "<group>";
 		};
-		30980F0017EB4D5D0081908B /* FileReader */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = FileReader;
-			sourceTree = "<group>";
-		};
 		30980F0717EB4E5D0081908B /* API */ = {
 			isa = PBXGroup;
 			children = (
-				30980F0117EB4E5A0081908B /* API.h */,
-				30980F0217EB4E5A0081908B /* API.c */,
+				30980F0117EB4E5A0081908B /* api.h */,
+				30980F0217EB4E5A0081908B /* api.c */,
 			);
-			name = API;
+			path = API;
 			sourceTree = "<group>";
 		};
 		30980F0817EB4E650081908B /* FileReader */ = {
@@ -97,7 +89,7 @@
 				30980F0317EB4E5A0081908B /* FileReader.c */,
 				30980F0417EB4E5A0081908B /* FileReader.h */,
 			);
-			name = FileReader;
+			path = FileReader;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,7 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				30980F0617EB4E5A0081908B /* FileReader.c in Sources */,
-				30980F0517EB4E5A0081908B /* API.c in Sources */,
+				30980F0517EB4E5A0081908B /* api.c in Sources */,
 				307E9B2017EB4CDB00747503 /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
