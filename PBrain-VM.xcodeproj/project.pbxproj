@@ -1,0 +1,269 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		307E9B2017EB4CDB00747503 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 307E9B1F17EB4CDB00747503 /* main.c */; };
+		307E9B2217EB4CDB00747503 /* PBrain_VM.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 307E9B2117EB4CDB00747503 /* PBrain_VM.1 */; };
+		30980F0517EB4E5A0081908B /* API.c in Sources */ = {isa = PBXBuildFile; fileRef = 30980F0217EB4E5A0081908B /* API.c */; };
+		30980F0617EB4E5A0081908B /* FileReader.c in Sources */ = {isa = PBXBuildFile; fileRef = 30980F0317EB4E5A0081908B /* FileReader.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		307E9B1A17EB4CDB00747503 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				307E9B2217EB4CDB00747503 /* PBrain_VM.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		307E9B1C17EB4CDB00747503 /* PBrain-VM */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "PBrain-VM"; sourceTree = BUILT_PRODUCTS_DIR; };
+		307E9B1F17EB4CDB00747503 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		307E9B2117EB4CDB00747503 /* PBrain_VM.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = PBrain_VM.1; sourceTree = "<group>"; };
+		30980F0117EB4E5A0081908B /* API.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = API.h; path = "../../COS431-Project/COS431-Project/API.h"; sourceTree = "<group>"; };
+		30980F0217EB4E5A0081908B /* API.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = API.c; path = "../../COS431-Project/COS431-Project/API.c"; sourceTree = "<group>"; };
+		30980F0317EB4E5A0081908B /* FileReader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = FileReader.c; path = "../../COS431-Project/COS431-Project/FileReader.c"; sourceTree = "<group>"; };
+		30980F0417EB4E5A0081908B /* FileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileReader.h; path = "../../COS431-Project/COS431-Project/FileReader.h"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		307E9B1917EB4CDB00747503 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		307E9B1317EB4CDB00747503 = {
+			isa = PBXGroup;
+			children = (
+				307E9B1E17EB4CDB00747503 /* PBrain-VM */,
+				307E9B1D17EB4CDB00747503 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		307E9B1D17EB4CDB00747503 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				307E9B1C17EB4CDB00747503 /* PBrain-VM */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		307E9B1E17EB4CDB00747503 /* PBrain-VM */ = {
+			isa = PBXGroup;
+			children = (
+				30980F0817EB4E650081908B /* FileReader */,
+				30980F0717EB4E5D0081908B /* API */,
+				30980F0017EB4D5D0081908B /* FileReader */,
+				307E9B1F17EB4CDB00747503 /* main.c */,
+				307E9B2117EB4CDB00747503 /* PBrain_VM.1 */,
+			);
+			path = "PBrain-VM";
+			sourceTree = "<group>";
+		};
+		30980F0017EB4D5D0081908B /* FileReader */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = FileReader;
+			sourceTree = "<group>";
+		};
+		30980F0717EB4E5D0081908B /* API */ = {
+			isa = PBXGroup;
+			children = (
+				30980F0117EB4E5A0081908B /* API.h */,
+				30980F0217EB4E5A0081908B /* API.c */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
+		30980F0817EB4E650081908B /* FileReader */ = {
+			isa = PBXGroup;
+			children = (
+				30980F0317EB4E5A0081908B /* FileReader.c */,
+				30980F0417EB4E5A0081908B /* FileReader.h */,
+			);
+			name = FileReader;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		307E9B1B17EB4CDB00747503 /* PBrain-VM */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 307E9B2517EB4CDB00747503 /* Build configuration list for PBXNativeTarget "PBrain-VM" */;
+			buildPhases = (
+				307E9B1817EB4CDB00747503 /* Sources */,
+				307E9B1917EB4CDB00747503 /* Frameworks */,
+				307E9B1A17EB4CDB00747503 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PBrain-VM";
+			productName = "PBrain-VM";
+			productReference = 307E9B1C17EB4CDB00747503 /* PBrain-VM */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		307E9B1417EB4CDB00747503 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Jake Marsh";
+			};
+			buildConfigurationList = 307E9B1717EB4CDB00747503 /* Build configuration list for PBXProject "PBrain-VM" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 307E9B1317EB4CDB00747503;
+			productRefGroup = 307E9B1D17EB4CDB00747503 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				307E9B1B17EB4CDB00747503 /* PBrain-VM */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		307E9B1817EB4CDB00747503 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30980F0617EB4E5A0081908B /* FileReader.c in Sources */,
+				30980F0517EB4E5A0081908B /* API.c in Sources */,
+				307E9B2017EB4CDB00747503 /* main.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		307E9B2317EB4CDB00747503 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		307E9B2417EB4CDB00747503 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		307E9B2617EB4CDB00747503 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		307E9B2717EB4CDB00747503 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		307E9B1717EB4CDB00747503 /* Build configuration list for PBXProject "PBrain-VM" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				307E9B2317EB4CDB00747503 /* Debug */,
+				307E9B2417EB4CDB00747503 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		307E9B2517EB4CDB00747503 /* Build configuration list for PBXNativeTarget "PBrain-VM" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				307E9B2617EB4CDB00747503 /* Debug */,
+				307E9B2717EB4CDB00747503 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 307E9B1417EB4CDB00747503 /* Project object */;
+}
