@@ -75,6 +75,9 @@ int main(int argc, const char * argv[])
         // write into Program_memory
         for (i = 0; i < 6; i++)
             memory[program_line][i] = input_line[i];
+        {
+            read_to_memory(memory, program_line, input_line, i);
+        }
         
         //read in next line of code
         ret = (int) read (fp, input_line, 7 );
