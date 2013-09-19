@@ -68,6 +68,7 @@ int main(int argc, const char * argv[])
     //iterate through the source code to and load it into memory
     
     int ret = read (fp, input_line, 7 ) ; //returns number of characters read
+    int ret = (int) read (fp, input_line, 7 ) ; //returns number of characters read
     
     while (1)
     {
@@ -84,6 +85,7 @@ int main(int argc, const char * argv[])
         //read in next line of code
         
         ret = read (fp, input_line, 7 ) ;
+        ret = (int) read (fp, input_line, 7 ) ;
         
         program_line++ ; //now at a new line in the program
     }
