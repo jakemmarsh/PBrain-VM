@@ -14,10 +14,10 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-int open_file(const char * fileName, int openType) {
+int open_file(const char * fileName) {
     int fp;
     
-    fp = open(fileName, openType) ; //always check the return value.
+    fp = open(fileName, O_RDONLY) ; //always check the return value.
     printf("Open is %d\n", fp) ;
     
     if (fp < 0) //error in read or EOF
