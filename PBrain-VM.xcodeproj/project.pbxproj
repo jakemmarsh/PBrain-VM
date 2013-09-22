@@ -34,6 +34,7 @@
 		30980F0217EB4E5A0081908B /* api.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = api.c; sourceTree = "<group>"; };
 		30980F0317EB4E5A0081908B /* FileReader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = FileReader.c; sourceTree = "<group>"; };
 		30980F0417EB4E5A0081908B /* FileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileReader.h; sourceTree = "<group>"; };
+		30E24AE317EF87610053F520 /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +71,7 @@
 				30980F0717EB4E5D0081908B /* API */,
 				307E9B1F17EB4CDB00747503 /* main.c */,
 				307E9B2117EB4CDB00747503 /* PBrain_VM.1 */,
+				30E24AE317EF87610053F520 /* main.h */,
 			);
 			path = "PBrain-VM";
 			sourceTree = "<group>";

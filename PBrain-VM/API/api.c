@@ -8,9 +8,12 @@
 // INCLUDE HEADER FILE
 #include "API.h"
 
+// INCLUDE MAIN HEADER FILE TO ACCESS VARIABLES
+#include "../main.h"
+
 
 // STORE LINE FROM PROGRAM INTO MEMORY
-void read_to_memory(char memory[100][6], int program_line, char input_line[7], int i) {
+void read_to_memory(int program_line, char input_line[7], int i) {
     memory[program_line][i] = input_line[i];
 }
 
