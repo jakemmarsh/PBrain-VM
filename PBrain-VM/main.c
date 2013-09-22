@@ -107,19 +107,19 @@ int main(int argc, const char * argv[])
                 break;
             }
             case 3: {
-                load_ac_immediate();
+                load_ac_immediate(get_int_param(2, 4));
                 break;
             }
             case 4: {
-                load_ac_register();
+                load_ac_register(get_pointer_param(2));
                 break;
             }
             case 5: {
-                load_ac_direct();
+                load_ac_direct(get_int_param(2, 2));
                 break;
             }
             case 6: {
-                store_ac_register();
+                store_ac_register(get_pointer_param(2));
                 break;
             }
             case 7: {

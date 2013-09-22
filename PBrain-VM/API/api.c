@@ -87,27 +87,43 @@ void subtract_pointer_immediate(char pointer[2], int value) {
 }
 
 // LOAD ACCUMULATOR IMMEDIATE (03 XX XX)
-void load_ac_immediate() {
-    
+void load_ac_immediate(int value) {
+    ACC = value;
 }
 
-// LOAD ACCUMULATOR REGISTER ADDRESSING (04 Pn XX)
-void load_ac_register() {
-    
+// LOAD ACCUMULATOR REGISTER ADDRESSING (04 Pn --)
+void load_ac_register(char pointer[2]) {
+    // set accumulator equal to memory location pointed to by pointer
+    if(!strcmp(pointer, "P0")) {
+        ACC = (int)memory[P0];
+        return;
+    }
+    if(!strcmp(pointer, "P1")) {
+        ACC = (int)memory[P1];
+        return;
+    }
+    if(!strcmp(pointer, "P2")) {
+        ACC = (int)memory[P2];
+        return;
+    }
+    if(!strcmp(pointer, "P3")) {
+        ACC = (int)memory[P3];
+        return;
+    }
 }
 
 // LOAD ACCUMULATOR DIRECT ADDRESSING (05 XX --)
-void load_ac_direct() {
-    
+void load_ac_direct(int location) {
+    ACC = (int)memory[location];
 }
 
 // STORE ACCUMULATOR REGISTER ADDRESSING (06 Pn --)
-void store_ac_register() {
-    
+void store_ac_register(char pointer [2]) {
+
 }
 
 // STORE ACCUMULATOR DIRECT ADDRESSING (07 XX --)
-void store_ac_direct() {
+void store_ac_direct(char pointer[2]) {
     
 }
 
