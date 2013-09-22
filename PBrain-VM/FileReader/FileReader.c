@@ -5,7 +5,6 @@
 //  by Jake Marsh
 //
 
-
 // INCLUDE HEADER FILE
 #include "FileReader.h"
 
