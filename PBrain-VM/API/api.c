@@ -5,6 +5,10 @@
 //  by Jake Marsh
 //
 
+// INCLUDE NECESSARY LIBRARIES
+#include <string.h>
+#include <stdio.h>
+
 // INCLUDE HEADER FILE
 #include "API.h"
 
@@ -18,17 +22,67 @@ void read_to_memory(int program_line, char input_line[7], int i) {
 }
 
 // LOAD POINTER IMMEDIATE (00 Pn XX)
-void load_pointer_immediate() {
+void load_pointer_immediate(char* pointer, int value) {
+    // insert value into correct pointer variable
+    if(!strcmp(pointer, "P0")) {
+        P0 = value;
+        return;
+    }
+    if(!strcmp(pointer, "P1")) {
+        P1 = value;
+        return;
+    }
+    if(!strcmp(pointer, "P2")) {
+        P2 = value;
+        return;
+    }
+    if(!strcmp(pointer, "P3")) {
+        P3 = value;
+        return;
+    }
     
 }
 
 // ADD TO POINTER IMMEDIATE (01 Pn XX)
-void add_pointer_immediate() {
-    
+void add_pointer_immediate(char pointer[2], int value) {
+    // increment correct pointer by value
+    if(!strcmp(pointer, "P0")) {
+        P0 += value;
+        return;
+    }
+    if(!strcmp(pointer, "P1")) {
+        P1 += value;
+        return;
+    }
+    if(!strcmp(pointer, "P2")) {
+        P2 += value;
+        return;
+    }
+    if(!strcmp(pointer, "P3")) {
+        P3 += value;
+        return;
+    }
 }
 
 // SUBTRACT FROM POINTER IMMEDIATE (02 Pn XX)
-void subtract_pointer_immediate() {
+void subtract_pointer_immediate(char pointer[2], int value) {
+    // decrement correct pointer by value
+    if(!strcmp(pointer, "P0")) {
+        P0 -= value;
+        return;
+    }
+    if(!strcmp(pointer, "P1")) {
+        P1 -= value;
+        return;
+    }
+    if(!strcmp(pointer, "P2")) {
+        P2 -= value;
+        return;
+    }
+    if(!strcmp(pointer, "P3")) {
+        P3 -= value;
+        return;
+    }
     
 }
 

@@ -11,4 +11,8 @@
 
 void read_to_memory(int program_line, char input_line[7], int i);
 
+void load_pointer_immediate(char pointer[2], int value);
+void add_pointer_immediate(char pointer[2], int value);
+void subtract_pointer_immediate(char pointer[2], int value);
+
 #endif
