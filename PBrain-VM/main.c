@@ -6,6 +6,7 @@
 //
 
 // INCLUDE NECESSARY LIBRARIES
+#include <stdio.h>
 #include <string.h>
 #include <unistd.h>
 #include <errno.h>
@@ -90,12 +91,141 @@ int main(int argc, const char * argv[])
         opcode  = (int) (IR[0] -48) * 10;
         opcode += (int) (IR[1] -48);
         
-        /* Now we know the opcode for the instruction. This
-         provides all the information we need to parse the
-         operands.
-         */
-        
         // execute relevant function for opcode
+        switch(opcode) {
+            case 0: {
+                load_pointer_immediate();
+                break;
+            }
+            case 1: {
+                add_pointer_immediate();
+                break;
+            }
+            case 2: {
+                subtract_pointer_immediate();
+                break;
+            }
+            case 3: {
+                load_ac_immediate();
+                break;
+            }
+            case 4: {
+                load_ac_register();
+                break;
+            }
+            case 5: {
+                load_ac_direct();
+                break;
+            }
+            case 6: {
+                store_ac_register();
+                break;
+            }
+            case 7: {
+                store_ac_direct();
+                break;
+            }
+            case 8: {
+                reg_to_mem_register();
+                break;
+            }
+            case 9: {
+                reg_to_mem_direct();
+                break;
+            }
+            case 10: {
+                mem_to_reg_register();
+                break;
+            }
+            case 11: {
+                mem_to_reg_direct();
+                break;
+            }
+            case 12: {
+                add_ac_immediate();
+                break;
+            }
+            case 13: {
+                subtract_ac_immediate();
+                break;
+            }
+            case 14: {
+                add_register_to_ac();
+                break;
+            }
+            case 15: {
+                subtract_register_from_ac();
+                break;
+            }
+            case 16: {
+                add_ac_register();
+                break;
+            }
+            case 17: {
+                add_ac_direct();
+                break;
+            }
+            case 18: {
+                subtract_ac_register();
+                break;
+            }
+            case 19: {
+                subtract_ac_direct();
+                break;
+            }
+            case 20: {
+                compare_equal_register();
+                break;
+            }
+            case 21: {
+                compare_less_register();
+                break;
+            }
+            case 22: {
+                compare_greater_register();
+                break;
+            }
+            case 23: {
+                compare_greater_immediate();
+                break;
+            }
+            case 24: {
+                compare_equal_immediate();
+                break;
+            }
+            case 25: {
+                compare_less_immediate();
+                break;
+            }
+            case 26: {
+                branch_if_true();
+                break;
+            }
+            case 27: {
+                branch_if_false();
+                break;
+            }
+            case 28: {
+                unconditional_branch();
+                break;
+            }
+            case 29: {
+                ac_to_register();
+                break;
+            }
+            case 30: {
+                register_to_ac();
+                break;
+            }
+            case 99: {
+                halt();
+                break;
+            }
+            default: {
+                printf("Invalid opcode\n");
+                break;
+            }
+        }
 
     }
 }
