@@ -15,11 +15,11 @@ void load_pointer_immediate(char pointer[2], int value);
 void add_pointer_immediate(char pointer[2], int value);
 void subtract_pointer_immediate(char pointer[2], int value);
 
-void load_ac_immediate(int value);
-void load_ac_register(char pointer[2]);
-void load_ac_direct(int location);
+void load_acc_immediate(int value);
+void load_acc_register(char pointer[2]);
+void load_acc_direct(int location);
 
 
-void store_ac_register(char pointer [2]);
+void store_acc_register(char pointer [2]);
 
 #endif

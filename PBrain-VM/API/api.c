@@ -87,12 +87,12 @@ void subtract_pointer_immediate(char pointer[2], int value) {
 }
 
 // LOAD ACCUMULATOR IMMEDIATE (03 XX XX)
-void load_ac_immediate(int value) {
+void load_acc_immediate(int value) {
     ACC = value;
 }
 
 // LOAD ACCUMULATOR REGISTER ADDRESSING (04 Pn --)
-void load_ac_register(char pointer[2]) {
+void load_acc_register(char pointer[2]) {
     // set accumulator equal to memory location pointed to by pointer
     if(!strcmp(pointer, "P0")) {
         ACC = (int)memory[P0];
@@ -113,17 +113,17 @@ void load_ac_register(char pointer[2]) {
 }
 
 // LOAD ACCUMULATOR DIRECT ADDRESSING (05 XX --)
-void load_ac_direct(int location) {
+void load_acc_direct(int location) {
     ACC = (int)memory[location];
 }
 
 // STORE ACCUMULATOR REGISTER ADDRESSING (06 Pn --)
-void store_ac_register(char pointer [2]) {
+void store_acc_register(char pointer [2]) {
 
 }
 
 // STORE ACCUMULATOR DIRECT ADDRESSING (07 XX --)
-void store_ac_direct(char pointer[2]) {
+void store_acc_direct(char pointer[2]) {
     
 }
 
@@ -148,42 +148,42 @@ void mem_to_reg_direct() {
 }
 
 // ADD ACCUMULATOR IMMEDIATE (12 XX XX)
-void add_ac_immediate() {
+void add_acc_immediate() {
     
 }
 
 // SUBTRACT ACCUMULATOR IMMEDIATE (13 XX XX)
-void subtract_ac_immediate() {
+void subtract_acc_immediate() {
     
 }
 
 // ADD CONTENTS OF REGISTER TO ACCUMULATOR (14 Rn --)
-void add_register_to_ac() {
+void add_register_to_acc() {
     
 }
 
 // SUBTRACT CONTENTS OF REGISTER FROM ACCUMULATOR (15 Rn --)
-void subtract_register_from_ac() {
+void subtract_register_from_acc() {
     
 }
 
 // ADD ACCUMULATOR REGISTER ADDRESSING (16 Pn --)
-void add_ac_register() {
+void add_acc_register() {
     
 }
 
 // ADD ACCUMULATOR DIRECT ADDRESSING (17 XX --)
-void add_ac_direct() {
+void add_acc_direct() {
     
 }
 
 // SUBTRACT FROM ACCUMULATOR REGISTER ADDRESSING (18 Pn --)
-void subtract_ac_register() {
+void subtract_acc_register() {
 
 }
 
 // SUBTRACT FROM ACCUMULATOR DIRECT ADDRESSING (19 XX --)
-void subtract_ac_direct() {
+void subtract_acc_direct() {
     
 }
 
@@ -233,12 +233,12 @@ void unconditional_branch() {
 }
 
 // LOAD REGISTER FROM ACCUMULATOR (29 Rn --)
-void ac_to_register() {
+void acc_to_register() {
     
 }
 
 // STORE REGISTER TO ACCUMULATOR (30 Rn --)
-void register_to_ac() {
+void register_to_acc() {
     
 }
 

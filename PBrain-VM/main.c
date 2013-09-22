@@ -107,23 +107,23 @@ int main(int argc, const char * argv[])
                 break;
             }
             case 3: {
-                load_ac_immediate(get_int_param(2, 4));
+                load_acc_immediate(get_int_param(2, 4));
                 break;
             }
             case 4: {
-                load_ac_register(get_pointer_param(2));
+                load_acc_register(get_pointer_param(2));
                 break;
             }
             case 5: {
-                load_ac_direct(get_int_param(2, 2));
+                load_acc_direct(get_int_param(2, 2));
                 break;
             }
             case 6: {
-                store_ac_register(get_pointer_param(2));
+                store_acc_register(get_pointer_param(2));
                 break;
             }
             case 7: {
-                store_ac_direct();
+                store_acc_direct();
                 break;
             }
             case 8: {
@@ -143,35 +143,35 @@ int main(int argc, const char * argv[])
                 break;
             }
             case 12: {
-                add_ac_immediate();
+                add_acc_immediate();
                 break;
             }
             case 13: {
-                subtract_ac_immediate();
+                subtract_acc_immediate();
                 break;
             }
             case 14: {
-                add_register_to_ac();
+                add_register_to_acc();
                 break;
             }
             case 15: {
-                subtract_register_from_ac();
+                subtract_register_from_acc();
                 break;
             }
             case 16: {
-                add_ac_register();
+                add_acc_register();
                 break;
             }
             case 17: {
-                add_ac_direct();
+                add_acc_direct();
                 break;
             }
             case 18: {
-                subtract_ac_register();
+                subtract_acc_register();
                 break;
             }
             case 19: {
-                subtract_ac_direct();
+                subtract_acc_direct();
                 break;
             }
             case 20: {
@@ -211,11 +211,11 @@ int main(int argc, const char * argv[])
                 break;
             }
             case 29: {
-                ac_to_register();
+                acc_to_register();
                 break;
             }
             case 30: {
-                register_to_ac();
+                register_to_acc();
                 break;
             }
             case 99: {
