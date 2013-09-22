@@ -14,14 +14,14 @@ API Functions
 ---------------------
 This virtual machine implementation provides an API for all thirty-two of the opcodes, as well as storing data and saving to memory.
 
-- **char * get_pointer_param(int start_position):**
+- **char * get_named_param(int start_position):**
 
-	> When given a full 6-character long instruction, it is sometimes necessary to extract a pointer identifier.
-	> This function can be used to obtain the name of the pointer as a string, providing only the `start_position` of the pointer name in the current instruction.
+	> When given a full 6-character long instruction, it is sometimes necessary to extract a named identifier, such as a pointer or register.
+	> This function can be used to obtain the name of the pointer or register as a string, providing only the `start_position` of the paremeter name in the current instruction.
 
 - **int get_int_param(int start_position, int length):**
 
-	> Similar to `get_pointer_param`, this function is used to extract necessary data from instructions. When a value (integer) is given directly in an instruction,
+	> Similar to `get_named_param`, this function is used to extract necessary data from instructions. When a value (integer) is given directly in an instruction,
 	> it must be used in the form of an int. This function returns an int, providing the `start_position` of the value in the current instruction, as well as the `length` of the value (in characters).
 
 - **void read_to_memory(int program_line, char input_line[7], int i):**

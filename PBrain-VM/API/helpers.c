@@ -17,17 +17,17 @@
 // INCLUDE MAIN HEADER FILE TO ACCESS VARIABLES
 #include "../main.h"
 
-char * get_pointer_param(int start_position) {
-    char tempPointer[2];
+char * get_named_param(int start_position) {
+    char tempParam[2];
     
-    memcpy(tempPointer, &IR[start_position], 2);
-    tempPointer[2] = '\0';
+    memcpy(tempParam, &IR[start_position], 2);
+    tempParam[2] = '\0';
     
-    char* pointer = malloc(2);
+    char* param = malloc(2);
     
-    strcpy(pointer, tempPointer);
+    strcpy(param, tempParam);
 
-    return pointer;
+    return param;
 }
 
 int get_int_param(int start_position, int length) {

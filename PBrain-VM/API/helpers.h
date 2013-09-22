@@ -9,7 +9,7 @@
 #ifndef HELPERS_INCLUDED
 #define HELPERS_INCLUDED
 
-char * get_pointer_param(int start_position);
+char * get_named_param(int start_position);
 int get_int_param(int start_position, int length);
 
 #endif

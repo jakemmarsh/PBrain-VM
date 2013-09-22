@@ -53,7 +53,7 @@ int main(int argc, const char * argv[])
     
     // call function to open the program file.
     // call will also check the return value
-    fp = open_file("program.txt", O_RDONLY);
+    fp = open_file("program.txt");
     
     // read first line of source code into memory
     int ret = (int) read(fp, input_line, 7 ); //returns number of characters read
@@ -95,15 +95,15 @@ int main(int argc, const char * argv[])
         // execute relevant function for opcode
         switch(opcode) {
             case 0: {
-                load_pointer_immediate(get_pointer_param(2), get_int_param(4, 2));
+                load_pointer_immediate(get_named_param(2), get_int_param(4, 2));
                 break;
             }
             case 1: {
-                add_pointer_immediate(get_pointer_param(2), get_int_param(4, 2));
+                add_pointer_immediate(get_named_param(2), get_int_param(4, 2));
                 break;
             }
             case 2: {
-                subtract_pointer_immediate(get_pointer_param(2), get_int_param(4, 2));
+                subtract_pointer_immediate(get_named_param(2), get_int_param(4, 2));
                 break;
             }
             case 3: {
@@ -111,7 +111,7 @@ int main(int argc, const char * argv[])
                 break;
             }
             case 4: {
-                load_acc_register(get_pointer_param(2));
+                load_acc_register(get_named_param(2));
                 break;
             }
             case 5: {
@@ -119,7 +119,7 @@ int main(int argc, const char * argv[])
                 break;
             }
             case 6: {
-                store_acc_register(get_pointer_param(2));
+                store_acc_register(get_named_param(2));
                 break;
             }
             case 7: {
