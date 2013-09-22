@@ -11,6 +11,7 @@
 		307E9B2217EB4CDB00747503 /* PBrain_VM.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 307E9B2117EB4CDB00747503 /* PBrain_VM.1 */; };
 		30980F0517EB4E5A0081908B /* api.c in Sources */ = {isa = PBXBuildFile; fileRef = 30980F0217EB4E5A0081908B /* api.c */; };
 		30980F0617EB4E5A0081908B /* FileReader.c in Sources */ = {isa = PBXBuildFile; fileRef = 30980F0317EB4E5A0081908B /* FileReader.c */; };
+		30E24AE517EF92F70053F520 /* helpers.c in Sources */ = {isa = PBXBuildFile; fileRef = 30E24AE417EF92F70053F520 /* helpers.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,6 +36,8 @@
 		30980F0317EB4E5A0081908B /* FileReader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = FileReader.c; sourceTree = "<group>"; };
 		30980F0417EB4E5A0081908B /* FileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileReader.h; sourceTree = "<group>"; };
 		30E24AE317EF87610053F520 /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
+		30E24AE417EF92F70053F520 /* helpers.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = helpers.c; sourceTree = "<group>"; };
+		30E24AE617EF93010053F520 /* helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = helpers.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +84,8 @@
 			children = (
 				30980F0117EB4E5A0081908B /* api.h */,
 				30980F0217EB4E5A0081908B /* api.c */,
+				30E24AE417EF92F70053F520 /* helpers.c */,
+				30E24AE617EF93010053F520 /* helpers.h */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -146,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				30980F0617EB4E5A0081908B /* FileReader.c in Sources */,
+				30E24AE517EF92F70053F520 /* helpers.c in Sources */,
 				30980F0517EB4E5A0081908B /* api.c in Sources */,
 				307E9B2017EB4CDB00747503 /* main.c in Sources */,
 			);

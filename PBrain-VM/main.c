@@ -17,6 +17,7 @@
 // INCLUDE FILES
 #include "API.h"
 #include "FileReader.h"
+#include "helpers.h"
 
 
 // These variables are associated with the implementation of the VM
@@ -88,21 +89,21 @@ int main(int argc, const char * argv[])
             IR[j] = memory[i][j];
         
         // calculate integer equivalent of opcode chars
-        opcode  = (int) (IR[0] -48) * 10;
-        opcode += (int) (IR[1] -48);
+        opcode  = (int) (IR[0] - 48) * 10;
+        opcode += (int) (IR[1] - 48);
         
         // execute relevant function for opcode
         switch(opcode) {
             case 0: {
-                load_pointer_immediate();
+                load_pointer_immediate(get_pointer_param(2), get_int_param(4, 2));
                 break;
             }
             case 1: {
-                add_pointer_immediate();
+                add_pointer_immediate(get_pointer_param(2), get_int_param(4, 2));
                 break;
             }
             case 2: {
-                subtract_pointer_immediate();
+                subtract_pointer_immediate(get_pointer_param(2), get_int_param(4, 2));
                 break;
             }
             case 3: {
