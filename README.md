@@ -14,5 +14,5 @@ API Opcode Functions
 ---------------------
 This virtual machine implementation provides an API for all thirty-two of the opcodes, as well as storing data and saving to memory.
 
-- **void read_to_memory(char memory[100][6], int program_line, char input_line[7], int i):**
-	Each time a new line of source code is interpreted by the virtual machine, it must be read into memory.
+- **void read_to_memory(int program_line, char input_line[7], int i):**
+	> Each time a new line of source code is interpreted by the virtual machine, it must be read into memory.
