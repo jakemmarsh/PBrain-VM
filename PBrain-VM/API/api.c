@@ -546,5 +546,5 @@ void register_to_acc(char register_name[2]) {
 
 // HALT (99 XX XX)
 void halt() {
-    
+    exit(0);
 }
