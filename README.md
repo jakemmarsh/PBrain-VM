@@ -56,6 +56,18 @@ This virtual machine implementation provides an API for all thirty-two of the op
 
 	> Corresponding to the instruction `06 Pn --`, used to store the data from the accumulator into memory at the location stored by the given pointer.
 
+- **void store_acc_direct(int location):**
+
+	> Corresponding to the instruction `07 XX --`, used to store the data from the accumulator into memory at the location specified.
+
+- **void reg_to_mem_register(char register_name[2], char pointer[2]):**
+
+	> Corresponding to the instruction `08 Rn Pn`, used to store the data from the specified register into memory at the location stored by the given pointer.
+
+- **void reg_to_mem_direct(char register_name[2], int location):**
+
+	> Corresponding to the instruction `09 Rn XX`, used to store the data from the specified register into memory at the location specified.
+
 More functions to go here later.
 
 - **void add_acc_immediate(int value):**
