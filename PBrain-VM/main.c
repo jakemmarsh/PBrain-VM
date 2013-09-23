@@ -143,19 +143,19 @@ int main(int argc, const char * argv[])
                 break;
             }
             case 12: {
-                add_acc_immediate();
+                add_acc_immediate(get_int_param(2, 4));
                 break;
             }
             case 13: {
-                subtract_acc_immediate();
+                subtract_acc_immediate(get_int_param(2, 4));
                 break;
             }
             case 14: {
-                add_register_to_acc();
+                add_register_to_acc(get_named_param(2));
                 break;
             }
             case 15: {
-                subtract_register_from_acc();
+                subtract_register_from_acc(get_named_param(2));
                 break;
             }
             case 16: {
@@ -187,35 +187,35 @@ int main(int argc, const char * argv[])
                 break;
             }
             case 23: {
-                compare_greater_immediate();
+                compare_greater_immediate(get_int_param(2, 4));
                 break;
             }
             case 24: {
-                compare_equal_immediate();
+                compare_equal_immediate(get_int_param(2, 4));
                 break;
             }
             case 25: {
-                compare_less_immediate();
+                compare_lesser_immediate(get_int_param(2, 4));
                 break;
             }
             case 26: {
-                branch_if_true();
+                branch_if_true(get_int_param(2, 2));
                 break;
             }
             case 27: {
-                branch_if_false();
+                branch_if_false(get_int_param(2, 2));
                 break;
             }
             case 28: {
-                unconditional_branch();
+                unconditional_branch(get_int_param(2, 2));
                 break;
             }
             case 29: {
-                acc_to_register();
+                acc_to_register(get_named_param(2));
                 break;
             }
             case 30: {
-                register_to_acc();
+                register_to_acc(get_named_param(2));
                 break;
             }
             case 99: {

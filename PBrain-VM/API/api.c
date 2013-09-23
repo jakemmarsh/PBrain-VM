@@ -148,23 +148,55 @@ void mem_to_reg_direct() {
 }
 
 // ADD ACCUMULATOR IMMEDIATE (12 XX XX)
-void add_acc_immediate() {
-    
+void add_acc_immediate(int value) {
+    ACC += value;
 }
 
 // SUBTRACT ACCUMULATOR IMMEDIATE (13 XX XX)
-void subtract_acc_immediate() {
-    
+void subtract_acc_immediate(int value) {
+    ACC -= value;
 }
 
 // ADD CONTENTS OF REGISTER TO ACCUMULATOR (14 Rn --)
-void add_register_to_acc() {
-    
+void add_register_to_acc(char register_name[2]) {
+    // get value from correct register
+    if(!strcmp(register_name, "R0")) {
+        ACC += R0;
+        return;
+    }
+    if(!strcmp(register_name, "R1")) {
+        ACC += R1;
+        return;
+    }
+    if(!strcmp(register_name, "R2")) {
+        ACC += R2;
+        return;
+    }
+    if(!strcmp(register_name, "R3")) {
+        ACC += R3;
+        return;
+    }
 }
 
 // SUBTRACT CONTENTS OF REGISTER FROM ACCUMULATOR (15 Rn --)
-void subtract_register_from_acc() {
-    
+void subtract_register_from_acc(char register_name[2]) {
+    // get value from correct register
+    if(!strcmp(register_name, "R0")) {
+        ACC -= R0;
+        return;
+    }
+    if(!strcmp(register_name, "R1")) {
+        ACC -= R1;
+        return;
+    }
+    if(!strcmp(register_name, "R2")) {
+        ACC -= R2;
+        return;
+    }
+    if(!strcmp(register_name, "R3")) {
+        ACC -= R3;
+        return;
+    }
 }
 
 // ADD ACCUMULATOR REGISTER ADDRESSING (16 Pn --)
@@ -203,43 +235,95 @@ void compare_greater_register() {
 }
 
 // COMPARE GREATER IMMEDIATE (23 XX XX)
-void compare_greater_immediate() {
-    
+void compare_greater_immediate(int value) {
+    if(ACC > value) {
+        PSW[0] = 1;
+    }
+    else {
+        PSW[0] = 0;
+    }
 }
 
 // COMPARE EQUAL IMMEDIATE (24 XX XX)
-void compare_equal_immediate() {
-    
+void compare_equal_immediate(int value) {
+    if(ACC == value) {
+        PSW[0] = 1;
+    }
+    else {
+        PSW[0] = 0;
+    }
 }
 
 // COMPARE LESS IMMEDIATE (25 XX XX)
-void compare_less_immediate() {
+void compare_lesser_immediate(int value) {
+    if(ACC < value) {
+        PSW[0] = 1;
+    }
+    else {
+        PSW[0] = 0;
+    }
     
 }
 
 // TRUE BRANCH CONDITIONAL (26 XX --)
-void branch_if_true() {
-    
+void branch_if_true(int new_program_line) {
+    if(PSW[0] == 1) {
+        PC = new_program_line;
+    }
 }
 
 // FALSE BRANCH CONDITIONAL (27 XX --)
-void branch_if_false() {
-    
+void branch_if_false(int new_program_line) {
+    if(PSW[0] == 0) {
+        PC = new_program_line;
+    }
 }
 
 // BRANCH UNCONDITIONAL (28 XX --)
-void unconditional_branch() {
-    
+void unconditional_branch(int new_program_line) {
+    PC = new_program_line;
 }
 
 // LOAD REGISTER FROM ACCUMULATOR (29 Rn --)
-void acc_to_register() {
-    
+void acc_to_register(char register_name[2]) {
+    // store ACC value to correct register
+    if(!strcmp(register_name, "R0")) {
+         R0 = ACC;
+        return;
+    }
+    if(!strcmp(register_name, "R1")) {
+        R1 = ACC;
+        return;
+    }
+    if(!strcmp(register_name, "R2")) {
+        R2 = ACC;
+        return;
+    }
+    if(!strcmp(register_name, "R3")) {
+        R3 = ACC;
+        return;
+    }
 }
 
 // STORE REGISTER TO ACCUMULATOR (30 Rn --)
-void register_to_acc() {
-    
+void register_to_acc(char register_name[2]) {
+    // get value to correct register
+    if(!strcmp(register_name, "R0")) {
+        ACC = R0;
+        return;
+    }
+    if(!strcmp(register_name, "R1")) {
+        ACC = R1;
+        return;
+    }
+    if(!strcmp(register_name, "R2")) {
+        ACC = R2;
+        return;
+    }
+    if(!strcmp(register_name, "R3")) {
+        ACC = R3;
+        return;
+    }
 }
 
 // HALT (99 XX XX)
