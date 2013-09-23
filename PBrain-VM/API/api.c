@@ -159,19 +159,15 @@ void reg_to_mem_register(char register_name[2], char pointer[2]) {
     char temp[7];
     if(!strcmp(register_name, "R0")) {
         sprintf(temp, "%d", R0);
-        return;
     }
-    if(!strcmp(register_name, "R1")) {
+    else if(!strcmp(register_name, "R1")) {
         sprintf(temp, "%d", R1);
-        return;
     }
-    if(!strcmp(register_name, "R2")) {
+    else if(!strcmp(register_name, "R2")) {
         sprintf(temp, "%d", R2);
-        return;
     }
-    if(!strcmp(register_name, "R3")) {
+    else if(!strcmp(register_name, "R3")) {
         sprintf(temp, "%d", R3);
-        return;
     }
     
     // store converted value into memory location specified by pointer
@@ -199,19 +195,15 @@ void reg_to_mem_direct(char register_name[2], int location) {
     char temp[7];
     if(!strcmp(register_name, "R0")) {
         sprintf(temp, "%d", R0);
-        return;
     }
-    if(!strcmp(register_name, "R1")) {
+    else if(!strcmp(register_name, "R1")) {
         sprintf(temp, "%d", R1);
-        return;
     }
-    if(!strcmp(register_name, "R2")) {
+    else if(!strcmp(register_name, "R2")) {
         sprintf(temp, "%d", R2);
-        return;
     }
-    if(!strcmp(register_name, "R3")) {
+    else if(!strcmp(register_name, "R3")) {
         sprintf(temp, "%d", R3);
-        return;
     }
     
     // store converted value into memory at specified location
@@ -219,13 +211,60 @@ void reg_to_mem_direct(char register_name[2], int location) {
 }
 
 // LOAD REGISTER FROM MEMORY: REGISTER ADDRESSING (10 Rn Pn)
-void mem_to_reg_register() {
+void mem_to_reg_register(char register_name[2], char pointer[2]) {
+    int temp = 0;
+    // get value from memory at location specified by pointer
+    if(!strcmp(pointer, "P0")) {
+        temp = atoi(memory[P0]);
+    }
+    else if(!strcmp(pointer, "P1")) {
+        temp = atoi(memory[P1]);
+    }
+    else if(!strcmp(pointer, "P2")) {
+        temp = atoi(memory[P2]);
+    }
+    else if(!strcmp(pointer, "P3")) {
+        temp = atoi(memory[P3]);
+    }
     
+    // store value into specified register
+    if(!strcmp(register_name, "R0")) {
+        R0 = temp;
+        return;
+    }
+    if(!strcmp(register_name, "R1")) {
+        R1 = temp;
+        return;
+    }
+    if(!strcmp(register_name, "R2")) {
+        R2 = temp;
+        return;
+    }
+    if(!strcmp(register_name, "R3")) {
+        R3 = temp;
+        return;
+    }
 }
 
 // LOAD REGISTER FROM MEMORY: DIRECT ADDRESSING (11 Rn XX)
-void mem_to_reg_direct() {
-    
+void mem_to_reg_direct(char register_name[2], int location) {
+    // set register equal to memory location pointed to by pointer
+    if(!strcmp(register_name, "R0")) {
+        R0 = atoi(memory[location]);
+        return;
+    }
+    if(!strcmp(register_name, "R1")) {
+        R1 = atoi(memory[location]);
+        return;
+    }
+    if(!strcmp(register_name, "R2")) {
+        R2 = atoi(memory[location]);
+        return;
+    }
+    if(!strcmp(register_name, "R3")) {
+        R3 = atoi(memory[location]);
+        return;
+    }
 }
 
 // ADD ACCUMULATOR IMMEDIATE (12 XX XX)
@@ -240,7 +279,7 @@ void subtract_acc_immediate(int value) {
 
 // ADD CONTENTS OF REGISTER TO ACCUMULATOR (14 Rn --)
 void add_register_to_acc(char register_name[2]) {
-    // get value from correct register
+    // add value from correct register
     if(!strcmp(register_name, "R0")) {
         ACC += R0;
         return;
@@ -261,7 +300,7 @@ void add_register_to_acc(char register_name[2]) {
 
 // SUBTRACT CONTENTS OF REGISTER FROM ACCUMULATOR (15 Rn --)
 void subtract_register_from_acc(char register_name[2]) {
-    // get value from correct register
+    // subtract value from correct register
     if(!strcmp(register_name, "R0")) {
         ACC -= R0;
         return;

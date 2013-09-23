@@ -68,7 +68,13 @@ This virtual machine implementation provides an API for all thirty-two of the op
 
 	> Corresponding to the instruction `09 Rn XX`, used to store the data from the specified register into memory at the location specified.
 
-More functions to go here later.
+- **void mem_to_reg_register(char register_name[2], char pointer[2]):**
+
+	> Corresponding to the instruction `10 Rn Pn`, used to load data from memory at the location stored by the given pointer into the specified register.
+
+- **void mem_to_reg_direct(char register_name[2], int location):**
+
+	> Corresponding to the instruction `11 Rn XX`, used to load data from memory at the specified location into the specified register.
 
 - **void add_acc_immediate(int value):**
 

@@ -135,11 +135,11 @@ int main(int argc, const char * argv[])
                 break;
             }
             case 10: {
-                mem_to_reg_register();
+                mem_to_reg_register(get_named_param(2), get_named_param(4));
                 break;
             }
             case 11: {
-                mem_to_reg_direct();
+                mem_to_reg_direct(get_named_param(2), get_int_param(4, 2));
                 break;
             }
             case 12: {

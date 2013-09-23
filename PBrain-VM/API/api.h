@@ -25,6 +25,9 @@ void store_acc_direct(int location);
 void reg_to_mem_register(char register_name[2], char pointer[2]);
 void reg_to_mem_direct(char register_name[2], int location);
 
+void mem_to_reg_register(char register_name[2], char pointer[2]);
+void mem_to_reg_direct(char register_name[2], int location);
+
 void add_acc_immediate(int value);
 void subtract_acc_immediate(int value);
 void add_register_to_acc(char register_name[2]);
