@@ -18,7 +18,7 @@
 #include "../main.h"
 
 char * get_named_param(int start_position) {
-    char tempParam[2];
+    char tempParam[3];
     
     memcpy(tempParam, &IR[start_position], 2);
     tempParam[2] = '\0';
