@@ -320,38 +320,136 @@ void subtract_register_from_acc(char register_name[2]) {
 }
 
 // ADD ACCUMULATOR REGISTER ADDRESSING (16 Pn --)
-void add_acc_register() {
-    
+void add_acc_register(char pointer[2]) {
+    // increment ACC by data in memory at location specified by pointer
+    if(!strcmp(pointer, "P0")) {
+        ACC += atoi(memory[P0]);
+        return;
+    }
+    if(!strcmp(pointer, "P1")) {
+        ACC += atoi(memory[P1]);
+        return;
+    }
+    if(!strcmp(pointer, "P2")) {
+        ACC += atoi(memory[P2]);
+        return;
+    }
+    if(!strcmp(pointer, "P3")) {
+        ACC += atoi(memory[P3]);
+        return;
+    }
 }
 
 // ADD ACCUMULATOR DIRECT ADDRESSING (17 XX --)
-void add_acc_direct() {
-    
+void add_acc_direct(int location) {
+    ACC += atoi(memory[location]);
 }
 
 // SUBTRACT FROM ACCUMULATOR REGISTER ADDRESSING (18 Pn --)
-void subtract_acc_register() {
-
+void subtract_acc_register(char pointer[2]) {
+    // decrement ACC by data in memory at location specified by pointer
+    if(!strcmp(pointer, "P0")) {
+        ACC -= atoi(memory[P0]);
+        return;
+    }
+    if(!strcmp(pointer, "P1")) {
+        ACC -= atoi(memory[P1]);
+        return;
+    }
+    if(!strcmp(pointer, "P2")) {
+        ACC -= atoi(memory[P2]);
+        return;
+    }
+    if(!strcmp(pointer, "P3")) {
+        ACC -= atoi(memory[P3]);
+        return;
+    }
 }
 
 // SUBTRACT FROM ACCUMULATOR DIRECT ADDRESSING (19 XX --)
-void subtract_acc_direct() {
-    
+void subtract_acc_direct(int location) {
+    ACC -= atoi(memory[location]);
 }
 
 // COMPARE EQUAL REGISTER ADDRESSING (20 Pn --)
-void compare_equal_register() {
+void compare_equal_register(char pointer[2]) {
+    int temp = 0;
     
+    // get value from memory at location specified by pointer
+    if(!strcmp(pointer, "P0")) {
+        temp = atoi(memory[P0]);
+    }
+    else if(!strcmp(pointer, "P1")) {
+        temp = atoi(memory[P1]);
+    }
+    else if(!strcmp(pointer, "P2")) {
+        temp = atoi(memory[P2]);
+    }
+    else if(!strcmp(pointer, "P3")) {
+        temp = atoi(memory[P3]);
+    }
+    
+    // compare ACC to value retrieved from memory
+    if(ACC == temp) {
+        PSW[0] = 1;
+    }
+    else {
+        PSW[0] = 0;
+    }
 }
 
 // COMPARE LESS REGISTER ADDRESSING (21 Pn --)
-void compare_less_register() {
+void compare_lesser_register(char pointer[2]) {
+    int temp = 0;
     
+    // get value from memory at location specified by pointer
+    if(!strcmp(pointer, "P0")) {
+        temp = atoi(memory[P0]);
+    }
+    else if(!strcmp(pointer, "P1")) {
+        temp = atoi(memory[P1]);
+    }
+    else if(!strcmp(pointer, "P2")) {
+        temp = atoi(memory[P2]);
+    }
+    else if(!strcmp(pointer, "P3")) {
+        temp = atoi(memory[P3]);
+    }
+    
+    // compare ACC to value retrieved from memory
+    if(ACC < temp) {
+        PSW[0] = 1;
+    }
+    else {
+        PSW[0] = 0;
+    }
 }
 
 // COMPARE GREATER REGISTER ADDRESSING (22 Pn --)
-void compare_greater_register() {
+void compare_greater_register(char pointer[2]) {
+    int temp = 0;
     
+    // get value from memory at location specified by pointer
+    if(!strcmp(pointer, "P0")) {
+        temp = atoi(memory[P0]);
+    }
+    else if(!strcmp(pointer, "P1")) {
+        temp = atoi(memory[P1]);
+    }
+    else if(!strcmp(pointer, "P2")) {
+        temp = atoi(memory[P2]);
+    }
+    else if(!strcmp(pointer, "P3")) {
+        temp = atoi(memory[P3]);
+    }
+    
+    // compare ACC to value retrieved from memory
+    if(ACC > temp) {
+        PSW[0] = 1;
+    }
+    else {
+        PSW[0] = 0;
+    }
 }
 
 // COMPARE GREATER IMMEDIATE (23 XX XX)

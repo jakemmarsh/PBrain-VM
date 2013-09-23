@@ -33,6 +33,15 @@ void subtract_acc_immediate(int value);
 void add_register_to_acc(char register_name[2]);
 void subtract_register_from_acc(char register_name[2]);
 
+void add_acc_register(char pointer[2]);
+void add_acc_direct(int location);
+void subtract_acc_register(char pointer[2]);
+void subtract_acc_direct(int location);
+
+void compare_equal_register(char pointer[2]);
+void compare_lesser_register(char pointer[2]);
+void compare_greater_register(char pointer[2]);
+
 void compare_greater_immediate(int value);
 void compare_equal_immediate(int value);
 void compare_lesser_immediate(int value);

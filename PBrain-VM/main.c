@@ -159,31 +159,31 @@ int main(int argc, const char * argv[])
                 break;
             }
             case 16: {
-                add_acc_register();
+                add_acc_register(get_named_param(2));
                 break;
             }
             case 17: {
-                add_acc_direct();
+                add_acc_direct(get_int_param(2, 2));
                 break;
             }
             case 18: {
-                subtract_acc_register();
+                subtract_acc_register(get_named_param(2));
                 break;
             }
             case 19: {
-                subtract_acc_direct();
+                subtract_acc_direct(get_int_param(2, 2));
                 break;
             }
             case 20: {
-                compare_equal_register();
+                compare_equal_register(get_named_param(2));
                 break;
             }
             case 21: {
-                compare_less_register();
+                compare_lesser_register(get_named_param(2));
                 break;
             }
             case 22: {
-                compare_greater_register();
+                compare_greater_register(get_named_param(2));
                 break;
             }
             case 23: {

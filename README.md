@@ -92,7 +92,33 @@ This virtual machine implementation provides an API for all thirty-two of the op
 
 	> Corresponding to the instruction `15 Rn --`, used to subtract the contents of the given register from the accumulator.
 
-More functions to go here later.
+- **void add_acc_register(char pointer[2]):**
+
+	> Corresponding to the instruction `16 Pn --`, used to add the value in memory at the location stored by the pointer to the accumulator.
+
+- **void add_acc_direct(int location):**
+
+	 > Corresponding to the instruction `17 XX --`, used to add the value in memory at the specified location to the accumulator.
+
+- **void subtract_acc_register(char pointer[2]):**
+
+	> Corresponding to the instruction `18 Pn --`, used to subtract the value in memory at the location stored by the pointer from the accumulator.
+
+- **void subtract_acc_direct(int location):**
+
+	> Corresponding to the instruction `19 XX --`, used to subtract the value in memory at the specified location from the accumulator.
+
+- **void compare_equal_register(char pointer[2]):**
+
+	> Corresponding to the instruction `20 Pn --`, used to set `PSW[0]` to 'T' if the accumulator is greater than the value stored in memory at the location stored by the pointer. If not, `PSW[0]` is set to 'F'.
+
+- **void compare_lesser_register(char pointer[2]):**
+
+	> Corresponding to the instruction `21 Pn --`, used to set `PSW[0]` to 'T' if the accumulator is less than the value stored in memory at the location stored by the pointer. If not, `PSW[0]` is set to 'F'.
+
+- **void compare_greater_register(char pointer[2]):**
+
+	> Corresponding to the instruction `22 Pn --`, used to set `PSW[0]` to 'T' if the accumulator is equal to the value stored in memory at the location stored by the pointer. If not, `PSW[0]` is set to 'F'.
 
 - **void compare_greater_immediate(int value):**
 
