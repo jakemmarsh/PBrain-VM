@@ -10,7 +10,7 @@
 		307E9B2017EB4CDB00747503 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 307E9B1F17EB4CDB00747503 /* main.c */; };
 		307E9B2217EB4CDB00747503 /* PBrain_VM.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 307E9B2117EB4CDB00747503 /* PBrain_VM.1 */; };
 		30980F0517EB4E5A0081908B /* api.c in Sources */ = {isa = PBXBuildFile; fileRef = 30980F0217EB4E5A0081908B /* api.c */; };
-		30980F0617EB4E5A0081908B /* FileReader.c in Sources */ = {isa = PBXBuildFile; fileRef = 30980F0317EB4E5A0081908B /* FileReader.c */; };
+		30980F0617EB4E5A0081908B /* filereader.c in Sources */ = {isa = PBXBuildFile; fileRef = 30980F0317EB4E5A0081908B /* filereader.c */; };
 		30E24AE517EF92F70053F520 /* helpers.c in Sources */ = {isa = PBXBuildFile; fileRef = 30E24AE417EF92F70053F520 /* helpers.c */; };
 /* End PBXBuildFile section */
 
@@ -33,8 +33,8 @@
 		307E9B2117EB4CDB00747503 /* PBrain_VM.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = PBrain_VM.1; sourceTree = "<group>"; };
 		30980F0117EB4E5A0081908B /* api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = api.h; sourceTree = "<group>"; };
 		30980F0217EB4E5A0081908B /* api.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = api.c; sourceTree = "<group>"; };
-		30980F0317EB4E5A0081908B /* FileReader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = FileReader.c; sourceTree = "<group>"; };
-		30980F0417EB4E5A0081908B /* FileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileReader.h; sourceTree = "<group>"; };
+		30980F0317EB4E5A0081908B /* filereader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = filereader.c; sourceTree = "<group>"; };
+		30980F0417EB4E5A0081908B /* filereader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = filereader.h; sourceTree = "<group>"; };
 		30E24AE317EF87610053F520 /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
 		30E24AE417EF92F70053F520 /* helpers.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = helpers.c; sourceTree = "<group>"; };
 		30E24AE617EF93010053F520 /* helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = helpers.h; sourceTree = "<group>"; };
@@ -93,8 +93,8 @@
 		30980F0817EB4E650081908B /* FileReader */ = {
 			isa = PBXGroup;
 			children = (
-				30980F0317EB4E5A0081908B /* FileReader.c */,
-				30980F0417EB4E5A0081908B /* FileReader.h */,
+				30980F0317EB4E5A0081908B /* filereader.c */,
+				30980F0417EB4E5A0081908B /* filereader.h */,
 			);
 			path = FileReader;
 			sourceTree = "<group>";
@@ -150,7 +150,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30980F0617EB4E5A0081908B /* FileReader.c in Sources */,
+				30980F0617EB4E5A0081908B /* filereader.c in Sources */,
 				30E24AE517EF92F70053F520 /* helpers.c in Sources */,
 				30980F0517EB4E5A0081908B /* api.c in Sources */,
 				307E9B2017EB4CDB00747503 /* main.c in Sources */,
