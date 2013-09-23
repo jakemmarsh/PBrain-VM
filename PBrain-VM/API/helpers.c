@@ -12,10 +12,15 @@
 #include <math.h>
 
 // INCLUDE HEADER FILE
-#include "helpers.h"
+#include "api.h"
 
 // INCLUDE MAIN HEADER FILE TO ACCESS VARIABLES
 #include "../main.h"
+
+// STORE LINE FROM PROGRAM INTO MEMORY
+void read_to_memory(int program_line, char input_line[7], int i) {
+    memory[program_line][i] = input_line[i];
+}
 
 char * get_named_param(int start_position) {
     char tempParam[3];

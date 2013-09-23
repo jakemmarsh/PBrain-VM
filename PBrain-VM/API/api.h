@@ -9,6 +9,8 @@
 #ifndef FILE_READER_INCLUDED
 #define FILE_READER_INCLUDED
 
+
+// INSTRUCTION FUNCTIONS
 void read_to_memory(int program_line, char input_line[7], int i);
 
 void load_pointer_immediate(char pointer[2], int value);
@@ -54,5 +56,9 @@ void acc_to_register(char register_name[2]);
 void register_to_acc(char register_name[2]);
 
 void halt();
+
+// HELPER FUNCTIONS
+char * get_named_param(int start_position);
+int get_int_param(int start_position, int length);
 
 #endif

@@ -16,12 +16,6 @@
 // INCLUDE MAIN HEADER FILE TO ACCESS VARIABLES
 #include "../main.h"
 
-
-// STORE LINE FROM PROGRAM INTO MEMORY
-void read_to_memory(int program_line, char input_line[7], int i) {
-    memory[program_line][i] = input_line[i];
-}
-
 // LOAD POINTER IMMEDIATE (00 Pn XX)
 void load_pointer_immediate(char* pointer, int value) {
     // insert value into correct pointer variable
