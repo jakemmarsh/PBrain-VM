@@ -20,6 +20,10 @@ void load_acc_register(char pointer[2]);
 void load_acc_direct(int location);
 
 void store_acc_register(char pointer [2]);
+void store_acc_direct(int location);
+
+void reg_to_mem_register(char register_name[2], char pointer[2]);
+void reg_to_mem_direct(char register_name[2], int location);
 
 void add_acc_immediate(int value);
 void subtract_acc_immediate(int value);

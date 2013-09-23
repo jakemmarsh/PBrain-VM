@@ -8,6 +8,7 @@
 // INCLUDE NECESSARY LIBRARIES
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 // INCLUDE HEADER FILE
 #include "API.h"
@@ -95,46 +96,126 @@ void load_acc_immediate(int value) {
 void load_acc_register(char pointer[2]) {
     // set accumulator equal to memory location pointed to by pointer
     if(!strcmp(pointer, "P0")) {
-        ACC = (int)memory[P0];
+        ACC = atoi(memory[P0]);
         return;
     }
     if(!strcmp(pointer, "P1")) {
-        ACC = (int)memory[P1];
+        ACC = atoi(memory[P1]);
         return;
     }
     if(!strcmp(pointer, "P2")) {
-        ACC = (int)memory[P2];
+        ACC = atoi(memory[P2]);
         return;
     }
     if(!strcmp(pointer, "P3")) {
-        ACC = (int)memory[P3];
+        ACC = atoi(memory[P3]);
         return;
     }
 }
 
 // LOAD ACCUMULATOR DIRECT ADDRESSING (05 XX --)
 void load_acc_direct(int location) {
-    ACC = (int)memory[location];
+    ACC = atoi(memory[location]);
 }
 
 // STORE ACCUMULATOR REGISTER ADDRESSING (06 Pn --)
-void store_acc_register(char pointer [2]) {
-
+void store_acc_register(char pointer[2]) {
+    // convert ACC value to string
+    char temp[7];
+    sprintf(temp, "%d", ACC);
+    
+    // store accumulator in memory location pointed to by pointer
+    if(!strcmp(pointer, "P0")) {
+        strcpy(memory[P0], temp);
+        return;
+    }
+    if(!strcmp(pointer, "P1")) {
+        strcpy(memory[P1], temp);
+        return;
+    }
+    if(!strcmp(pointer, "P2")) {
+        strcpy(memory[P2], temp);
+        return;
+    }
+    if(!strcmp(pointer, "P3")) {
+        strcpy(memory[P3], temp);
+        return;
+    }
 }
 
 // STORE ACCUMULATOR DIRECT ADDRESSING (07 XX --)
-void store_acc_direct(char pointer[2]) {
+void store_acc_direct(int location) {
+    // convert ACC value to string
+    char temp[7];
+    sprintf(temp, "%d", ACC);
     
+    // store accumulator in memory location specified
+    strcpy(memory[location], temp);
 }
 
 // STORE REGISTER TO MEMORY: REGISTER ADDRESSING (08 Rn Pn)
-void reg_to_mem_register() {
+void reg_to_mem_register(char register_name[2], char pointer[2]) {
+    // convert specified register's value to string
+    char temp[7];
+    if(!strcmp(register_name, "R0")) {
+        sprintf(temp, "%d", R0);
+        return;
+    }
+    if(!strcmp(register_name, "R1")) {
+        sprintf(temp, "%d", R1);
+        return;
+    }
+    if(!strcmp(register_name, "R2")) {
+        sprintf(temp, "%d", R2);
+        return;
+    }
+    if(!strcmp(register_name, "R3")) {
+        sprintf(temp, "%d", R3);
+        return;
+    }
     
+    // store converted value into memory location specified by pointer
+    if(!strcmp(pointer, "P0")) {
+        strcpy(memory[P0], temp);
+        return;
+    }
+    if(!strcmp(pointer, "P1")) {
+        strcpy(memory[P1], temp);
+        return;
+    }
+    if(!strcmp(pointer, "P2")) {
+        strcpy(memory[P2], temp);
+        return;
+    }
+    if(!strcmp(pointer, "P3")) {
+        strcpy(memory[P3], temp);
+        return;
+    }
 }
 
 // STORE REGISTER TO MEMORY: DIRECT ADDRESSING (09 Rn XX)
-void reg_to_mem_direct() {
+void reg_to_mem_direct(char register_name[2], int location) {
+    // convert specified register's value to string
+    char temp[7];
+    if(!strcmp(register_name, "R0")) {
+        sprintf(temp, "%d", R0);
+        return;
+    }
+    if(!strcmp(register_name, "R1")) {
+        sprintf(temp, "%d", R1);
+        return;
+    }
+    if(!strcmp(register_name, "R2")) {
+        sprintf(temp, "%d", R2);
+        return;
+    }
+    if(!strcmp(register_name, "R3")) {
+        sprintf(temp, "%d", R3);
+        return;
+    }
     
+    // store converted value into memory at specified location
+    strcpy(memory[location], temp);
 }
 
 // LOAD REGISTER FROM MEMORY: REGISTER ADDRESSING (10 Rn Pn)

@@ -16,7 +16,7 @@
 
 // INCLUDE FILES
 #include "API.h"
-#include "FileReader.h"
+#include "filereader.h"
 #include "helpers.h"
 
 
@@ -123,15 +123,15 @@ int main(int argc, const char * argv[])
                 break;
             }
             case 7: {
-                store_acc_direct();
+                store_acc_direct(get_int_param(2, 2));
                 break;
             }
             case 8: {
-                reg_to_mem_register();
+                reg_to_mem_register(get_named_param(2), get_named_param(4));
                 break;
             }
             case 9: {
-                reg_to_mem_direct();
+                reg_to_mem_direct(get_named_param(2), get_int_param(4, 2));
                 break;
             }
             case 10: {
