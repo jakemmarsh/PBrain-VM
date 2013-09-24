@@ -22,6 +22,7 @@ void read_to_memory(int program_line, char input_line[7], int i) {
     memory[program_line][i] = input_line[i];
 }
 
+// EXTRACT NAMED PARAM FROM AN INSTRUCTION, SUCH AS A POINTER OR REGISTER NAME
 char * get_named_param(int start_position) {
     char tempParam[3];
     
@@ -35,6 +36,7 @@ char * get_named_param(int start_position) {
     return param;
 }
 
+// EXTRACT AN INTEGER PARAM FROM AN INSTRUCTION
 int get_int_param(int start_position, int length) {
     int i;
     

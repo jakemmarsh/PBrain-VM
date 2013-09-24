@@ -11,7 +11,7 @@
 #include <stdlib.h>
 
 // INCLUDE HEADER FILE
-#include "API.h"
+#include "api.h"
 
 // INCLUDE MAIN HEADER FILE TO ACCESS VARIABLES
 #include "../main.h"

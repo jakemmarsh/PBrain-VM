@@ -45,8 +45,7 @@ char memory[100][6];
 int opcode;
 int program_line = 0;
 
-int main(int argc, const char * argv[])
-{
+int main(int argc, const char * argv[]) {
     
     char *ptr;
     
@@ -74,8 +73,7 @@ int main(int argc, const char * argv[])
     }
 
     // execute all code read in from source
-    while (PC <= program_line)
-    {
+    while (PC <= program_line) {
         
         // copy current line into the instruction register (IR)
         for (j = 0; j < 6; j++) {
