@@ -58,17 +58,11 @@ int main(int argc, const char * argv[])
     int ret = (int) read(fp, input_line, 7 ); //returns number of characters read
     
     // iterate through the rest of the source code
-    while (1)
-    {
-        
-        if (ret <= 0) //indicates end of file or
-            break; //breaks out of loop
-        
+    while (ret > 0) {
         ptr = input_line; //base address of array
         
         // write into Program_memory
-        for (i = 0; i < 6; i++)
-        {
+        for (i = 0; i < 6; i++) {
             read_to_memory(program_line, input_line, i);
         }
         
@@ -78,18 +72,21 @@ int main(int argc, const char * argv[])
         // increment current line count to keep track
         program_line++;
     }
-    
+
     // execute all code read in from source
-    for (i = 0; i < program_line; i++)
+    while (PC <= program_line)
     {
         
         // copy current line into the instruction register (IR)
-        for (j = 0; j < 6; j++)
-            IR[j] = memory[i][j];
+        for (j = 0; j < 6; j++) {
+            IR[j] = memory[PC][j];
+        }
         
         // calculate integer equivalent of opcode chars
-        opcode  = (int) (IR[0] - 48) * 10;
+        opcode = (int) (IR[0] - 48) * 10;
         opcode += (int) (IR[1] - 48);
+        
+        printf("opcode is: %d\n", opcode);
         
         // execute relevant function for opcode
         switch(opcode) {
@@ -226,6 +223,7 @@ int main(int argc, const char * argv[])
                 break;
             }
         }
+        PC++;
 
     }
 }
