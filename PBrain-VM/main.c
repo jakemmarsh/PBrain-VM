@@ -15,8 +15,8 @@
 #include <fcntl.h>
 
 // INCLUDE FILES
-#include "api.h"
-#include "filereader.h"
+#include "API/api.h"
+#include "FileReader/filereader.h"
 
 
 // These variables are associated with the implementation of the VM
