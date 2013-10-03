@@ -1,13 +1,13 @@
 PBrain-VM
 =========
 
-Virtual machine implementation written in C for the imaginary Assembly-like language "PBrain".
+Virtual machine implementation written in C for the imaginary instruction set "PBrain".
 
 
 PBrain
 -------
 
-"PBrain" is a simplified, imaginary version of Assembly language. It has a total of *thirty-two* opcode instructions. They are all in the format `XX YY ZZ`, where `XX` is the opcode, `YY` is a first parameter, and `ZZ` is a second parameter.
+"PBrain" is a simplified, imaginary instruction set. It has a total of *thirty-two* opcode instructions. They are all in the format `XX YY ZZ`, where `XX` is the opcode, `YY` is a first parameter, and `ZZ` is a second parameter.
 
 
 API Functions
