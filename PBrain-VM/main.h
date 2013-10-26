@@ -45,6 +45,10 @@ struct process {
     EAR,
     // TIME SLICE FOR PREEMPTING
     time_slice,
+    // PROGRAM COUNTER
+    PC,
+    // TOTAL NUMBER OF LINES IN PROCESS'S PROGRAM
+    program_lines,
     idNumber;
     char PSW[2];
 };

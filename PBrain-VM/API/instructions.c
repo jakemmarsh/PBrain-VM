@@ -481,7 +481,7 @@ void compare_lesser_immediate(int value) {
 void branch_if_true(int new_program_line) {
     if(active_process->PSW[0] == 1) {
         // have to subtract one to account for line numbers starting at 0, not 1
-        PC = new_program_line - 1;
+        active_process->PC = new_program_line - 1;
     }
 }
 
@@ -489,14 +489,14 @@ void branch_if_true(int new_program_line) {
 void branch_if_false(int new_program_line) {
     if(active_process->PSW[0] == 0) {
         // have to subtract one to account for line numbers starting at 0, not 1
-        PC = new_program_line - 1;
+        active_process->PC = new_program_line - 1;
     }
 }
 
 // BRANCH UNCONDITIONAL (28 XX --)
 void unconditional_branch(int new_program_line) {
     // have to subtract one to account for line numbers starting at 0, not 1
-    PC = new_program_line - 1;
+    active_process->PC = new_program_line - 1;
 }
 
 // LOAD REGISTER FROM ACCUMULATOR (29 Rn --)

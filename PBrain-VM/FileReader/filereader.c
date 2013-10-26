@@ -39,6 +39,7 @@ void initialize_processes() {
     for(i = 0; i <= 9; i++) {
         char file_name[9];
         sprintf(file_name, "PC.%d.txt", i);
+        
         program_line = i * 100;
         
         // set initial values for corresponding process control block
@@ -48,6 +49,7 @@ void initialize_processes() {
                 PCB_0.time_slice = rand() % 10 + 1;
                 PCB_0.idNumber = 0;
                 PCB_0.next = &PCB_1;
+                active_process = &PCB_0;
                 break;
             }
             case 1: {
@@ -55,6 +57,7 @@ void initialize_processes() {
                 PCB_1.time_slice = rand() % 10 + 1;
                 PCB_1.idNumber = 1;
                 PCB_1.next = &PCB_2;
+                active_process = &PCB_1;
                 break;
             }
             case 2: {
@@ -62,6 +65,8 @@ void initialize_processes() {
                 PCB_2.time_slice = rand() % 10 + 1;
                 PCB_2.idNumber = 2;
                 PCB_2.next = &PCB_3;
+                //PCB_2.program_lines = 0;
+                active_process = &PCB_2;
                 break;
             }
             case 3: {
@@ -69,6 +74,7 @@ void initialize_processes() {
                 PCB_3.time_slice = rand() % 10 + 1;
                 PCB_3.idNumber = 3;
                 PCB_3.next = &PCB_4;
+                active_process = &PCB_3;
                 break;
             }
             case 4: {
@@ -76,6 +82,7 @@ void initialize_processes() {
                 PCB_4.time_slice = rand() % 10 + 1;
                 PCB_4.idNumber = 4;
                 PCB_4.next = &PCB_5;
+                active_process = &PCB_4;
                 break;
             }
             case 5: {
@@ -83,6 +90,7 @@ void initialize_processes() {
                 PCB_5.time_slice = rand() % 10 + 1;
                 PCB_5.idNumber = 5;
                 PCB_5.next = &PCB_6;
+                active_process = &PCB_5;
                 break;
             }
             case 6: {
@@ -90,6 +98,7 @@ void initialize_processes() {
                 PCB_6.time_slice = rand() % 10 + 1;
                 PCB_6.idNumber = 6;
                 PCB_6.next = &PCB_7;
+                active_process = &PCB_6;
                 break;
             }
             case 7: {
@@ -97,6 +106,7 @@ void initialize_processes() {
                 PCB_7.time_slice = rand() % 10 + 1;
                 PCB_7.idNumber = 7;
                 PCB_7.next = &PCB_8;
+                active_process = &PCB_7;
                 break;
             }
             case 8: {
@@ -104,6 +114,7 @@ void initialize_processes() {
                 PCB_8.time_slice = rand() % 10 + 1;
                 PCB_8.idNumber = 8;
                 PCB_8.next = &PCB_9;
+                active_process = &PCB_8;
                 break;
             }
             case 9: {
@@ -111,6 +122,7 @@ void initialize_processes() {
                 PCB_9.time_slice = rand() % 10 + 1;
                 PCB_9.idNumber = 9;
                 PCB_9.next = NULL;
+                active_process = &PCB_9;
                 break;
             }
             default: {
@@ -124,12 +136,10 @@ void initialize_processes() {
         fp = open_file(file_name);
         
         // read first line of source code into memory
-        int ret = (int) read(fp, input_line, 7 ); //returns number of characters read
+        int ret = (int) read(fp, input_line, 7); //returns number of characters read
         
         // iterate through the rest of the source code
         while (ret > 0) {
-            ptr = input_line; //base address of array
-            
             // write into memory
             for (j = 0; j < 6; j++) {
                 read_to_memory(program_line, input_line, j);
@@ -139,6 +149,7 @@ void initialize_processes() {
             ret = (int) read(fp, input_line, 7);
             
             // increment current line count to keep track
+            active_process->program_lines++;
             program_line++;
         }
     }

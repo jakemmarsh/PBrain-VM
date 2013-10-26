@@ -21,7 +21,6 @@
 #include "API/api.h"
 #include "FileReader/filereader.h"
 
-
 // These variables are associated with the implementation of the VM
 int fp;
 char *ptr;
@@ -30,7 +29,6 @@ char input_line[7];
 
 // These are variables representing the VM itself
 char IR[6];
-int PC = 0;
 
 // PROGRAM MEMORY
 char memory[1000][6];
@@ -55,13 +53,13 @@ int main(int argc, const char * argv[]) {
     initialize_processes();
 
     // execute all code read in from source
-    while (PC <= program_line) {
-        printf("PC: %d\n", PC);
-        printf("program_line: %d\n", program_line);
+    while (active_process->PC <= active_process->program_lines) {
+        printf("PC: %d\n", active_process->PC);
+        printf("lines in current process: %d\n", active_process->program_lines);
         
         // copy current line into the instruction register (IR)
         for (k = 0; k < 6; k++) {
-            IR[k] = memory[PC][k];
+            IR[k] = memory[active_process->PC + active_process->BAR][k];
         }
         
         // calculate integer equivalent of opcode chars
@@ -73,6 +71,6 @@ int main(int argc, const char * argv[]) {
         // make call to api to execute relevant function for opcode
         execute_opcode(opcode);
         
-        PC++;
+        active_process->PC++;
     }
 }
