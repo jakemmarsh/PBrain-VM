@@ -71,7 +71,7 @@ void subtract_pointer_immediate(char pointer[2], int value) {
         return;
     }
     if(!strcmp(pointer, "P2")) {
-        P2 -= value;
+        active_process->P2 -= value;
         return;
     }
     if(!strcmp(pointer, "P3")) {
