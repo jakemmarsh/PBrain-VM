@@ -44,7 +44,8 @@ struct process {
     // EFFECTIVE ADDRESS REGISTER (EAR = PC + BAR)
     EAR,
     // TIME SLICE FOR PREEMPTING
-    time_slice;
+    time_slice,
+    idNumber;
     char PSW[2];
 };
 
