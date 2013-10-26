@@ -480,20 +480,23 @@ void compare_lesser_immediate(int value) {
 // TRUE BRANCH CONDITIONAL (26 XX --)
 void branch_if_true(int new_program_line) {
     if(PSW[0] == 1) {
-        PC = new_program_line;
+        // have to subtract one to account for line numbers starting at 0, not 1
+        PC = new_program_line - 1;
     }
 }
 
 // FALSE BRANCH CONDITIONAL (27 XX --)
 void branch_if_false(int new_program_line) {
     if(PSW[0] == 0) {
-        PC = new_program_line;
+        // have to subtract one to account for line numbers starting at 0, not 1
+        PC = new_program_line - 1;
     }
 }
 
 // BRANCH UNCONDITIONAL (28 XX --)
 void unconditional_branch(int new_program_line) {
-    PC = new_program_line;
+    // have to subtract one to account for line numbers starting at 0, not 1
+    PC = new_program_line - 1;
 }
 
 // LOAD REGISTER FROM ACCUMULATOR (29 Rn --)
