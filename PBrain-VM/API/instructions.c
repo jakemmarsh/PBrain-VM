@@ -20,19 +20,19 @@
 void load_pointer_immediate(char* pointer, int value) {
     // insert value into correct pointer variable
     if(!strcmp(pointer, "P0")) {
-        P0 = value;
+        active_process->P0 = value;
         return;
     }
     if(!strcmp(pointer, "P1")) {
-        P1 = value;
+        active_process->P1 = value;
         return;
     }
     if(!strcmp(pointer, "P2")) {
-        P2 = value;
+        active_process->P2 = value;
         return;
     }
     if(!strcmp(pointer, "P3")) {
-        P3 = value;
+        active_process->P3 = value;
         return;
     }
     
@@ -42,19 +42,19 @@ void load_pointer_immediate(char* pointer, int value) {
 void add_pointer_immediate(char pointer[2], int value) {
     // increment correct pointer by value
     if(!strcmp(pointer, "P0")) {
-        P0 += value;
+        active_process->P0 += value;
         return;
     }
     if(!strcmp(pointer, "P1")) {
-        P1 += value;
+        active_process->P1 += value;
         return;
     }
     if(!strcmp(pointer, "P2")) {
-        P2 += value;
+        active_process->P2 += value;
         return;
     }
     if(!strcmp(pointer, "P3")) {
-        P3 += value;
+        active_process->P3 += value;
         return;
     }
 }
@@ -63,11 +63,11 @@ void add_pointer_immediate(char pointer[2], int value) {
 void subtract_pointer_immediate(char pointer[2], int value) {
     // decrement correct pointer by value
     if(!strcmp(pointer, "P0")) {
-        P0 -= value;
+        active_process->P0 -= value;
         return;
     }
     if(!strcmp(pointer, "P1")) {
-        P1 -= value;
+        active_process->P1 -= value;
         return;
     }
     if(!strcmp(pointer, "P2")) {
@@ -75,7 +75,7 @@ void subtract_pointer_immediate(char pointer[2], int value) {
         return;
     }
     if(!strcmp(pointer, "P3")) {
-        P3 -= value;
+        active_process->P3 -= value;
         return;
     }
     
@@ -83,56 +83,56 @@ void subtract_pointer_immediate(char pointer[2], int value) {
 
 // LOAD ACCUMULATOR IMMEDIATE (03 XX XX)
 void load_acc_immediate(int value) {
-    ACC = value;
+    active_process->ACC = value;
 }
 
 // LOAD ACCUMULATOR REGISTER ADDRESSING (04 Pn --)
 void load_acc_register(char pointer[2]) {
     // set accumulator equal to memory location pointed to by pointer
     if(!strcmp(pointer, "P0")) {
-        ACC = atoi(memory[P0]);
+        active_process->ACC = atoi(memory[P0]);
         return;
     }
     if(!strcmp(pointer, "P1")) {
-        ACC = atoi(memory[P1]);
+        active_process->ACC = atoi(memory[P1]);
         return;
     }
     if(!strcmp(pointer, "P2")) {
-        ACC = atoi(memory[P2]);
+        active_process->ACC = atoi(memory[P2]);
         return;
     }
     if(!strcmp(pointer, "P3")) {
-        ACC = atoi(memory[P3]);
+        active_process->ACC = atoi(memory[P3]);
         return;
     }
 }
 
 // LOAD ACCUMULATOR DIRECT ADDRESSING (05 XX --)
 void load_acc_direct(int location) {
-    ACC = atoi(memory[location]);
+    active_process->ACC = atoi(memory[location]);
 }
 
 // STORE ACCUMULATOR REGISTER ADDRESSING (06 Pn --)
 void store_acc_register(char pointer[2]) {
     // convert ACC value to string
     char temp[7];
-    sprintf(temp, "%d", ACC);
+    sprintf(temp, "%d", active_process->ACC);
     
     // store accumulator in memory location pointed to by pointer
     if(!strcmp(pointer, "P0")) {
-        strcpy(memory[P0], temp);
+        strcpy(memory[active_process->P0], temp);
         return;
     }
     if(!strcmp(pointer, "P1")) {
-        strcpy(memory[P1], temp);
+        strcpy(memory[active_process->P1], temp);
         return;
     }
     if(!strcmp(pointer, "P2")) {
-        strcpy(memory[P2], temp);
+        strcpy(memory[active_process->P2], temp);
         return;
     }
     if(!strcmp(pointer, "P3")) {
-        strcpy(memory[P3], temp);
+        strcpy(memory[active_process->P3], temp);
         return;
     }
 }
@@ -141,7 +141,7 @@ void store_acc_register(char pointer[2]) {
 void store_acc_direct(int location) {
     // convert ACC value to string
     char temp[7];
-    sprintf(temp, "%d", ACC);
+    sprintf(temp, "%d", active_process->ACC);
     
     // store accumulator in memory location specified
     strcpy(memory[location], temp);
@@ -152,33 +152,33 @@ void reg_to_mem_register(char register_name[2], char pointer[2]) {
     // convert specified register's value to string
     char temp[7];
     if(!strcmp(register_name, "R0")) {
-        sprintf(temp, "%d", R0);
+        sprintf(temp, "%d", active_process->R0);
     }
     else if(!strcmp(register_name, "R1")) {
-        sprintf(temp, "%d", R1);
+        sprintf(temp, "%d", active_process->R1);
     }
     else if(!strcmp(register_name, "R2")) {
-        sprintf(temp, "%d", R2);
+        sprintf(temp, "%d", active_process->R2);
     }
     else if(!strcmp(register_name, "R3")) {
-        sprintf(temp, "%d", R3);
+        sprintf(temp, "%d", active_process->R3);
     }
     
     // store converted value into memory location specified by pointer
     if(!strcmp(pointer, "P0")) {
-        strcpy(memory[P0], temp);
+        strcpy(memory[active_process->P0], temp);
         return;
     }
     if(!strcmp(pointer, "P1")) {
-        strcpy(memory[P1], temp);
+        strcpy(memory[active_process->P1], temp);
         return;
     }
     if(!strcmp(pointer, "P2")) {
-        strcpy(memory[P2], temp);
+        strcpy(memory[active_process->P2], temp);
         return;
     }
     if(!strcmp(pointer, "P3")) {
-        strcpy(memory[P3], temp);
+        strcpy(memory[active_process->P3], temp);
         return;
     }
 }
@@ -188,16 +188,16 @@ void reg_to_mem_direct(char register_name[2], int location) {
     // convert specified register's value to string
     char temp[7];
     if(!strcmp(register_name, "R0")) {
-        sprintf(temp, "%d", R0);
+        sprintf(temp, "%d", active_process->R0);
     }
     else if(!strcmp(register_name, "R1")) {
-        sprintf(temp, "%d", R1);
+        sprintf(temp, "%d", active_process->R1);
     }
     else if(!strcmp(register_name, "R2")) {
-        sprintf(temp, "%d", R2);
+        sprintf(temp, "%d", active_process->R2);
     }
     else if(!strcmp(register_name, "R3")) {
-        sprintf(temp, "%d", R3);
+        sprintf(temp, "%d", active_process->R3);
     }
     
     // store converted value into memory at specified location
@@ -209,33 +209,33 @@ void mem_to_reg_register(char register_name[2], char pointer[2]) {
     int temp = 0;
     // get value from memory at location specified by pointer
     if(!strcmp(pointer, "P0")) {
-        temp = atoi(memory[P0]);
+        temp = atoi(memory[active_process->P0]);
     }
     else if(!strcmp(pointer, "P1")) {
-        temp = atoi(memory[P1]);
+        temp = atoi(memory[active_process->P1]);
     }
     else if(!strcmp(pointer, "P2")) {
-        temp = atoi(memory[P2]);
+        temp = atoi(memory[active_process->P2]);
     }
     else if(!strcmp(pointer, "P3")) {
-        temp = atoi(memory[P3]);
+        temp = atoi(memory[active_process->P3]);
     }
     
     // store value into specified register
     if(!strcmp(register_name, "R0")) {
-        R0 = temp;
+        active_process->R0 = temp;
         return;
     }
     if(!strcmp(register_name, "R1")) {
-        R1 = temp;
+        active_process->R1 = temp;
         return;
     }
     if(!strcmp(register_name, "R2")) {
-        R2 = temp;
+        active_process->R2 = temp;
         return;
     }
     if(!strcmp(register_name, "R3")) {
-        R3 = temp;
+        active_process->R3 = temp;
         return;
     }
 }
@@ -244,50 +244,50 @@ void mem_to_reg_register(char register_name[2], char pointer[2]) {
 void mem_to_reg_direct(char register_name[2], int location) {
     // set register equal to memory location pointed to by pointer
     if(!strcmp(register_name, "R0")) {
-        R0 = atoi(memory[location]);
+        active_process->R0 = atoi(memory[location]);
         return;
     }
     if(!strcmp(register_name, "R1")) {
-        R1 = atoi(memory[location]);
+        active_process->R1 = atoi(memory[location]);
         return;
     }
     if(!strcmp(register_name, "R2")) {
-        R2 = atoi(memory[location]);
+        active_process->R2 = atoi(memory[location]);
         return;
     }
     if(!strcmp(register_name, "R3")) {
-        R3 = atoi(memory[location]);
+        active_process->R3 = atoi(memory[location]);
         return;
     }
 }
 
 // ADD ACCUMULATOR IMMEDIATE (12 XX XX)
 void add_acc_immediate(int value) {
-    ACC += value;
+    active_process->ACC += value;
 }
 
 // SUBTRACT ACCUMULATOR IMMEDIATE (13 XX XX)
 void subtract_acc_immediate(int value) {
-    ACC -= value;
+    active_process->ACC -= value;
 }
 
 // ADD CONTENTS OF REGISTER TO ACCUMULATOR (14 Rn --)
 void add_register_to_acc(char register_name[2]) {
     // add value from correct register
     if(!strcmp(register_name, "R0")) {
-        ACC += R0;
+        active_process->ACC += R0;
         return;
     }
     if(!strcmp(register_name, "R1")) {
-        ACC += R1;
+        active_process->ACC += R1;
         return;
     }
     if(!strcmp(register_name, "R2")) {
-        ACC += R2;
+        active_process->ACC += R2;
         return;
     }
     if(!strcmp(register_name, "R3")) {
-        ACC += R3;
+        active_process->ACC += R3;
         return;
     }
 }
@@ -296,19 +296,19 @@ void add_register_to_acc(char register_name[2]) {
 void subtract_register_from_acc(char register_name[2]) {
     // subtract value from correct register
     if(!strcmp(register_name, "R0")) {
-        ACC -= R0;
+        active_process->ACC -= R0;
         return;
     }
     if(!strcmp(register_name, "R1")) {
-        ACC -= R1;
+        active_process->ACC -= R1;
         return;
     }
     if(!strcmp(register_name, "R2")) {
-        ACC -= R2;
+        active_process->ACC -= R2;
         return;
     }
     if(!strcmp(register_name, "R3")) {
-        ACC -= R3;
+        active_process->ACC -= R3;
         return;
     }
 }
@@ -317,52 +317,52 @@ void subtract_register_from_acc(char register_name[2]) {
 void add_acc_register(char pointer[2]) {
     // increment ACC by data in memory at location specified by pointer
     if(!strcmp(pointer, "P0")) {
-        ACC += atoi(memory[P0]);
+        active_process->ACC += atoi(memory[active_process->P0]);
         return;
     }
     if(!strcmp(pointer, "P1")) {
-        ACC += atoi(memory[P1]);
+        active_process->ACC += atoi(memory[active_process->P1]);
         return;
     }
     if(!strcmp(pointer, "P2")) {
-        ACC += atoi(memory[P2]);
+        active_process->ACC += atoi(memory[active_process->P2]);
         return;
     }
     if(!strcmp(pointer, "P3")) {
-        ACC += atoi(memory[P3]);
+        active_process->ACC += atoi(memory[active_process->P3]);
         return;
     }
 }
 
 // ADD ACCUMULATOR DIRECT ADDRESSING (17 XX --)
 void add_acc_direct(int location) {
-    ACC += atoi(memory[location]);
+    active_process->ACC += atoi(memory[location]);
 }
 
 // SUBTRACT FROM ACCUMULATOR REGISTER ADDRESSING (18 Pn --)
 void subtract_acc_register(char pointer[2]) {
     // decrement ACC by data in memory at location specified by pointer
     if(!strcmp(pointer, "P0")) {
-        ACC -= atoi(memory[P0]);
+        active_process->ACC -= atoi(memory[active_process->P0]);
         return;
     }
     if(!strcmp(pointer, "P1")) {
-        ACC -= atoi(memory[P1]);
+        active_process->ACC -= atoi(memory[active_process->P1]);
         return;
     }
     if(!strcmp(pointer, "P2")) {
-        ACC -= atoi(memory[P2]);
+        active_process->ACC -= atoi(memory[active_process->P2]);
         return;
     }
     if(!strcmp(pointer, "P3")) {
-        ACC -= atoi(memory[P3]);
+        active_process->ACC -= atoi(memory[active_process->P3]);
         return;
     }
 }
 
 // SUBTRACT FROM ACCUMULATOR DIRECT ADDRESSING (19 XX --)
 void subtract_acc_direct(int location) {
-    ACC -= atoi(memory[location]);
+    active_process->ACC -= atoi(memory[location]);
 }
 
 // COMPARE EQUAL REGISTER ADDRESSING (20 Pn --)
@@ -371,24 +371,24 @@ void compare_equal_register(char pointer[2]) {
     
     // get value from memory at location specified by pointer
     if(!strcmp(pointer, "P0")) {
-        temp = atoi(memory[P0]);
+        temp = atoi(memory[active_process->P0]);
     }
     else if(!strcmp(pointer, "P1")) {
-        temp = atoi(memory[P1]);
+        temp = atoi(memory[active_process->P1]);
     }
     else if(!strcmp(pointer, "P2")) {
-        temp = atoi(memory[P2]);
+        temp = atoi(memory[active_process->P2]);
     }
     else if(!strcmp(pointer, "P3")) {
-        temp = atoi(memory[P3]);
+        temp = atoi(memory[active_process->P3]);
     }
     
     // compare ACC to value retrieved from memory
-    if(ACC == temp) {
-        PSW[0] = 1;
+    if(active_process->ACC == temp) {
+        active_process->PSW[0] = 1;
     }
     else {
-        PSW[0] = 0;
+        active_process->PSW[0] = 0;
     }
 }
 
@@ -398,24 +398,24 @@ void compare_lesser_register(char pointer[2]) {
     
     // get value from memory at location specified by pointer
     if(!strcmp(pointer, "P0")) {
-        temp = atoi(memory[P0]);
+        temp = atoi(memory[active_process->P0]);
     }
     else if(!strcmp(pointer, "P1")) {
-        temp = atoi(memory[P1]);
+        temp = atoi(memory[active_process->P1]);
     }
     else if(!strcmp(pointer, "P2")) {
-        temp = atoi(memory[P2]);
+        temp = atoi(memory[active_process->P2]);
     }
     else if(!strcmp(pointer, "P3")) {
-        temp = atoi(memory[P3]);
+        temp = atoi(memory[active_process->P3]);
     }
     
     // compare ACC to value retrieved from memory
-    if(ACC < temp) {
-        PSW[0] = 1;
+    if(active_process->ACC < temp) {
+        active_process->PSW[0] = 1;
     }
     else {
-        PSW[0] = 0;
+        active_process->PSW[0] = 0;
     }
 }
 
@@ -425,61 +425,61 @@ void compare_greater_register(char pointer[2]) {
     
     // get value from memory at location specified by pointer
     if(!strcmp(pointer, "P0")) {
-        temp = atoi(memory[P0]);
+        temp = atoi(memory[active_process->P0]);
     }
     else if(!strcmp(pointer, "P1")) {
-        temp = atoi(memory[P1]);
+        temp = atoi(memory[active_process->P1]);
     }
     else if(!strcmp(pointer, "P2")) {
-        temp = atoi(memory[P2]);
+        temp = atoi(memory[active_process->P2]);
     }
     else if(!strcmp(pointer, "P3")) {
-        temp = atoi(memory[P3]);
+        temp = atoi(memory[active_process->P3]);
     }
     
     // compare ACC to value retrieved from memory
-    if(ACC > temp) {
-        PSW[0] = 1;
+    if(active_process->ACC > temp) {
+        active_process->PSW[0] = 1;
     }
     else {
-        PSW[0] = 0;
+        active_process->PSW[0] = 0;
     }
 }
 
 // COMPARE GREATER IMMEDIATE (23 XX XX)
 void compare_greater_immediate(int value) {
-    if(ACC > value) {
-        PSW[0] = 1;
+    if(active_process->ACC > value) {
+        active_process->PSW[0] = 1;
     }
     else {
-        PSW[0] = 0;
+        active_process->PSW[0] = 0;
     }
 }
 
 // COMPARE EQUAL IMMEDIATE (24 XX XX)
 void compare_equal_immediate(int value) {
-    if(ACC == value) {
-        PSW[0] = 1;
+    if(active_process->ACC == value) {
+        active_process->PSW[0] = 1;
     }
     else {
-        PSW[0] = 0;
+        active_process->PSW[0] = 0;
     }
 }
 
 // COMPARE LESS IMMEDIATE (25 XX XX)
 void compare_lesser_immediate(int value) {
-    if(ACC < value) {
-        PSW[0] = 1;
+    if(active_process->ACC < value) {
+        active_process->PSW[0] = 1;
     }
     else {
-        PSW[0] = 0;
+        active_process->PSW[0] = 0;
     }
     
 }
 
 // TRUE BRANCH CONDITIONAL (26 XX --)
 void branch_if_true(int new_program_line) {
-    if(PSW[0] == 1) {
+    if(active_process->PSW[0] == 1) {
         // have to subtract one to account for line numbers starting at 0, not 1
         PC = new_program_line - 1;
     }
@@ -487,7 +487,7 @@ void branch_if_true(int new_program_line) {
 
 // FALSE BRANCH CONDITIONAL (27 XX --)
 void branch_if_false(int new_program_line) {
-    if(PSW[0] == 0) {
+    if(active_process->PSW[0] == 0) {
         // have to subtract one to account for line numbers starting at 0, not 1
         PC = new_program_line - 1;
     }
@@ -503,19 +503,19 @@ void unconditional_branch(int new_program_line) {
 void acc_to_register(char register_name[2]) {
     // store ACC value to correct register
     if(!strcmp(register_name, "R0")) {
-         R0 = ACC;
+         active_process->R0 = active_process->ACC;
         return;
     }
     if(!strcmp(register_name, "R1")) {
-        R1 = ACC;
+        active_process->R1 = active_process->ACC;
         return;
     }
     if(!strcmp(register_name, "R2")) {
-        R2 = ACC;
+        active_process->R2 = active_process->ACC;
         return;
     }
     if(!strcmp(register_name, "R3")) {
-        R3 = ACC;
+        active_process->R3 = active_process->ACC;
         return;
     }
 }
@@ -524,19 +524,19 @@ void acc_to_register(char register_name[2]) {
 void register_to_acc(char register_name[2]) {
     // get value to correct register
     if(!strcmp(register_name, "R0")) {
-        ACC = R0;
+        active_process->ACC = active_process->R0;
         return;
     }
     if(!strcmp(register_name, "R1")) {
-        ACC = R1;
+        active_process->ACC = active_process->R1;
         return;
     }
     if(!strcmp(register_name, "R2")) {
-        ACC = R2;
+        active_process->ACC = active_process->R2;
         return;
     }
     if(!strcmp(register_name, "R3")) {
-        ACC = R3;
+        active_process->ACC = active_process->R3;
         return;
     }
 }
