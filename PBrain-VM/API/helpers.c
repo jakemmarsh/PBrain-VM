@@ -49,6 +49,38 @@ int get_int_param(int start_position, int length) {
     return value;
 }
 
+void switch_processes() {
+    // print out data about old process that is stopping
+    printf("\nOLD PROCESS ID: %d\n", active_process->idNumber);
+    printf("OLD PROCESS TIME SLICE: %d\n", active_process->time_slice);
+    printf("OLD PROCESS LAST INSTRUCTION: %s\n\n", IR);
+    
+    // set instruction counter back to zero
+    active_process->IC = 0;
+    
+    // set previous item in linked list to link to current item's "next"
+    if(get_prev(active_process)) {
+        get_prev(active_process)->next = active_process->next;
+    }
+    
+    // set last item in linked list to link to current item
+    get_last()->next = active_process;
+    // set current item's "next" to null since it is now at the end
+    struct process *tempNext = active_process->next;
+    active_process->next = NULL;
+    // change active process to old "next" value
+    active_process = tempNext;
+    
+    // print out data about new process that is beginning
+    printf("NEW PROCESS ID: %d\n", active_process->idNumber);
+    printf("NEW PROCESS TIME SLICE: %d\n", active_process->time_slice);
+    // copy current line into the instruction register (IR) for printing
+    for (k = 0; k < 6; k++) {
+        IR[k] = memory[active_process->EAR][k];
+    }
+    printf("NEW PROCESS FIRST INSTRUCTION: %s\n\n", IR);
+}
+
 void execute_opcode(int opcode) {
     switch(opcode) {
         case 0: {

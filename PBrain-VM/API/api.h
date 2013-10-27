@@ -61,6 +61,7 @@ void read_to_memory(int program_line, char input_line[7], int i);
 char * get_named_param(int start_position);
 int get_int_param(int start_position, int length);
 
+void switch_processes();
 void execute_opcode(int opcode);
 
 // LINKED LIST FUNCTIONS
