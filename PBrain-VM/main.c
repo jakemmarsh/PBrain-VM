@@ -55,8 +55,6 @@ int main(int argc, const char * argv[]) {
 
     // execute all code read in from source
     while (active_process->PC <= active_process->program_lines) {
-        printf("current process ID: %d\n", active_process->idNumber);
-        
         // if process has reached time slice, reset to zero, move to end of RQ, and start next process
         if(active_process->IC == active_process->time_slice && active_process->next) {
             // print out data about old process that is stopping
@@ -64,8 +62,21 @@ int main(int argc, const char * argv[]) {
             printf("OLD PROCESS TIME SLICE: %d\n", active_process->time_slice);
             printf("OLD PROCESS LAST INSTRUCTION: %s\n\n", IR);
             
+            // set instruction counter back to zero
             active_process->IC = 0;
-            active_process = active_process->next;
+
+            // set previous item in linked list to link to current item's "next"
+            if(get_prev(active_process)) {
+                get_prev(active_process)->next = active_process->next;
+            }
+            
+            // set last item in linked list to link to current item
+            get_last()->next = active_process;
+            // set current item's "next" to null since it is now at the end
+            struct process *tempNext = active_process->next;
+            active_process->next = NULL;
+            // change active process to old "next" value
+            active_process = tempNext;
             
             // print out data about new process that is beginning
             printf("NEW PROCESS ID: %d\n", active_process->idNumber);
@@ -95,9 +106,6 @@ int main(int argc, const char * argv[]) {
         
         // increment PC for process, as well as the EAR accordingly
         active_process->PC++;
-        printf("PC: %d\n", active_process->PC);
-        printf("time slice: %d\n", active_process->time_slice);
-        printf("IC: %d\n", active_process->IC);
         active_process->EAR = active_process->BAR + active_process->PC;
     }
 }
