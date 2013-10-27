@@ -8,8 +8,8 @@
 // INCLUDE HEADER FILE
 #include "FileReader.h"
 
-#include "main.h"
-#include "api.h"
+#include "../main.h"
+#include "../API/api.h"
 
 // INCLUDE NECESSARY LIBRARIES
 #include <stdio.h>
