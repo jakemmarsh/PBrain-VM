@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		307E9B2017EB4CDB00747503 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 307E9B1F17EB4CDB00747503 /* main.c */; };
 		307E9B2217EB4CDB00747503 /* PBrain_VM.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 307E9B2117EB4CDB00747503 /* PBrain_VM.1 */; };
+		30918AB0181DA37D004C923C /* linked_list.c in Sources */ = {isa = PBXBuildFile; fileRef = 30918AAF181DA37D004C923C /* linked_list.c */; };
 		30980F0517EB4E5A0081908B /* instructions.c in Sources */ = {isa = PBXBuildFile; fileRef = 30980F0217EB4E5A0081908B /* instructions.c */; };
 		30980F0617EB4E5A0081908B /* filereader.c in Sources */ = {isa = PBXBuildFile; fileRef = 30980F0317EB4E5A0081908B /* filereader.c */; };
 		30E24AE517EF92F70053F520 /* helpers.c in Sources */ = {isa = PBXBuildFile; fileRef = 30E24AE417EF92F70053F520 /* helpers.c */; };
@@ -31,6 +32,7 @@
 		307E9B1C17EB4CDB00747503 /* PBrain-VM */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "PBrain-VM"; sourceTree = BUILT_PRODUCTS_DIR; };
 		307E9B1F17EB4CDB00747503 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		307E9B2117EB4CDB00747503 /* PBrain_VM.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = PBrain_VM.1; sourceTree = "<group>"; };
+		30918AAF181DA37D004C923C /* linked_list.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = linked_list.c; sourceTree = "<group>"; };
 		30980F0117EB4E5A0081908B /* api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = api.h; sourceTree = "<group>"; };
 		30980F0217EB4E5A0081908B /* instructions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = instructions.c; sourceTree = "<group>"; };
 		30980F0317EB4E5A0081908B /* filereader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = filereader.c; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				30980F0117EB4E5A0081908B /* api.h */,
 				30980F0217EB4E5A0081908B /* instructions.c */,
 				30E24AE417EF92F70053F520 /* helpers.c */,
+				30918AAF181DA37D004C923C /* linked_list.c */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -149,6 +152,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				30980F0617EB4E5A0081908B /* filereader.c in Sources */,
+				30918AB0181DA37D004C923C /* linked_list.c in Sources */,
 				30E24AE517EF92F70053F520 /* helpers.c in Sources */,
 				30980F0517EB4E5A0081908B /* instructions.c in Sources */,
 				307E9B2017EB4CDB00747503 /* main.c in Sources */,
