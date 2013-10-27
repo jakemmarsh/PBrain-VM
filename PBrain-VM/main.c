@@ -38,7 +38,7 @@ int opcode;
 int program_line;
 
 // PROCESS CONTROL BLOCKS
-struct process PCB_0, PCB_1, PCB_2, PCB_3, PCB_4, PCB_5, PCB_6, PCB_7, PCB_8, PCB_9;
+struct process *PCB_0, *PCB_1, *PCB_2, *PCB_3, *PCB_4, *PCB_5, *PCB_6, *PCB_7, *PCB_8, *PCB_9;
 
 // keep track of current process for sending to instructions
 struct process *active_process;
@@ -51,7 +51,7 @@ int main(int argc, const char * argv[]) {
     initialize_processes();
     
     // set active process to first one in the linked list
-    active_process = &PCB_0;
+    active_process = PCB_0;
 
     // execute all code read in from source
     while (active_process->PC <= active_process->program_lines) {
@@ -60,9 +60,9 @@ int main(int argc, const char * argv[]) {
         // if process has reached time slice, reset to zero, move to end of RQ, and start next process
         if(active_process->IC == active_process->time_slice && active_process->next) {
             // print out data about old process that is stopping
-            printf("OLD PROCESS ID: %d\n", active_process->idNumber);
+            printf("\nOLD PROCESS ID: %d\n", active_process->idNumber);
             printf("OLD PROCESS TIME SLICE: %d\n", active_process->time_slice);
-            printf("OLD PROCESS LAST INSTRUCTION: %s\n", IR);
+            printf("OLD PROCESS LAST INSTRUCTION: %s\n\n", IR);
             
             active_process->IC = 0;
             active_process = active_process->next;
@@ -74,7 +74,7 @@ int main(int argc, const char * argv[]) {
             for (k = 0; k < 6; k++) {
                 IR[k] = memory[active_process->EAR][k];
             }
-            printf("NEW PROCESS FIRST INSTRUCTION: %s\n", IR);
+            printf("NEW PROCESS FIRST INSTRUCTION: %s\n\n", IR);
             continue;
         }
         
@@ -95,6 +95,9 @@ int main(int argc, const char * argv[]) {
         
         // increment PC for process, as well as the EAR accordingly
         active_process->PC++;
+        printf("PC: %d\n", active_process->PC);
+        printf("time slice: %d\n", active_process->time_slice);
+        printf("IC: %d\n", active_process->IC);
         active_process->EAR = active_process->BAR + active_process->PC;
     }
 }

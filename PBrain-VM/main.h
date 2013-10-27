@@ -53,7 +53,7 @@ struct process {
     char PSW[2];
 };
 
-extern struct process PCB_0, PCB_1, PCB_2, PCB_3, PCB_4, PCB_5, PCB_6, PCB_7, PCB_8, PCB_9;
+extern struct process *PCB_0, *PCB_1, *PCB_2, *PCB_3, *PCB_4, *PCB_5, *PCB_6, *PCB_7, *PCB_8, *PCB_9;
 
 extern struct process *active_process;
 
