@@ -543,5 +543,42 @@ void register_to_acc(char register_name[2]) {
 
 // HALT (99 XX XX)
 void halt() {
-    exit(0);
+    if(active_process->next) {
+        // print out data about old process that is stopping
+        printf("\nOLD PROCESS ID: %d\n", active_process->idNumber);
+        printf("OLD PROCESS TIME SLICE: %d\n", active_process->time_slice);
+        printf("OLD PROCESS LAST INSTRUCTION: %s\n\n", IR);
+    }
+    else {
+        // print out data about old process that is stopping
+        printf("\nLAST PROCESS ID: %d\n", active_process->idNumber);
+        printf("LAST PROCESS TIME SLICE: %d\n", active_process->time_slice);
+        printf("LAST PROCESS LAST INSTRUCTION: %s\n\n", IR);
+    }
+    
+    // set instruction counter back to zero
+    active_process->IC = 0;
+    
+    // set previous item in linked list to link to current item's "next"
+    if(get_prev(active_process)) {
+        get_prev(active_process)->next = active_process->next;
+    }
+
+    // if a process still exists to complete, switch to it
+    if(active_process->next) {
+        active_process = active_process->next;
+    }
+    // otherwise, stop program
+    else {
+        exit(0);
+    }
+    
+    // print out data about new process that is beginning
+    printf("NEW PROCESS ID: %d\n", active_process->idNumber);
+    printf("NEW PROCESS TIME SLICE: %d\n", active_process->time_slice);
+    // copy current line into the instruction register (IR) for printing
+    for (k = 0; k < 6; k++) {
+        IR[k] = memory[active_process->EAR][k];
+    }
+    printf("NEW PROCESS FIRST INSTRUCTION: %s\n\n", IR);
 }
