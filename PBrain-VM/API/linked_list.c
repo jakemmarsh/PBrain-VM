@@ -14,8 +14,6 @@
 // INCLUDE MAIN HEADER FILE TO ACCESS VARIABLES
 #include "../main.h"
 
-struct process *head = NULL;
-
 struct process* get_prev(struct process *process_to_find_prev) {
     for(int i = 0; i <= 9; i++) {
         switch(i) {
