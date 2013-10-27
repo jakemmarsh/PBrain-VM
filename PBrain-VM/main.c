@@ -47,19 +47,40 @@ int main(int argc, const char * argv[]) {
     // use current time to generate random numbers, in order to be more "random"
     srand((unsigned)time(NULL));
     
-    active_process = &PCB_0;
-    
     // make call to filereader to open all files and initialize process blocks
     initialize_processes();
+    
+    // set active process to first one in the linked list
+    active_process = &PCB_0;
 
     // execute all code read in from source
     while (active_process->PC <= active_process->program_lines) {
-        printf("PC: %d\n", active_process->PC);
-        printf("lines in current process: %d\n", active_process->program_lines);
+        printf("current process ID: %d\n", active_process->idNumber);
+        
+        // if process has reached time slice, reset to zero, move to end of RQ, and start next process
+        if(active_process->IC == active_process->time_slice && active_process->next) {
+            // print out data about old process that is stopping
+            printf("OLD PROCESS ID: %d\n", active_process->idNumber);
+            printf("OLD PROCESS TIME SLICE: %d\n", active_process->time_slice);
+            printf("OLD PROCESS LAST INSTRUCTION: %s\n", IR);
+            
+            active_process->IC = 0;
+            active_process = active_process->next;
+            
+            // print out data about new process that is beginning
+            printf("NEW PROCESS ID: %d\n", active_process->idNumber);
+            printf("NEW PROCESS TIME SLICE: %d\n", active_process->time_slice);
+            // copy current line into the instruction register (IR) for printing
+            for (k = 0; k < 6; k++) {
+                IR[k] = memory[active_process->EAR][k];
+            }
+            printf("NEW PROCESS FIRST INSTRUCTION: %s\n", IR);
+            continue;
+        }
         
         // copy current line into the instruction register (IR)
         for (k = 0; k < 6; k++) {
-            IR[k] = memory[active_process->PC + active_process->BAR][k];
+            IR[k] = memory[active_process->EAR][k];
         }
         
         // calculate integer equivalent of opcode chars
@@ -70,7 +91,10 @@ int main(int argc, const char * argv[]) {
         
         // make call to api to execute relevant function for opcode
         execute_opcode(opcode);
+        active_process->IC++;
         
+        // increment PC for process, as well as the EAR accordingly
         active_process->PC++;
+        active_process->EAR = active_process->BAR + active_process->PC;
     }
 }

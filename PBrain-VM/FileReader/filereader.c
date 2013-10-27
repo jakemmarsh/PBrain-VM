@@ -46,6 +46,7 @@ void initialize_processes() {
         switch(i) {
             case 0: {
                 PCB_0.BAR = i * 100;
+                PCB_0.EAR = PCB_0.BAR;
                 PCB_0.time_slice = rand() % 10 + 1;
                 PCB_0.idNumber = 0;
                 PCB_0.next = &PCB_1;
@@ -54,6 +55,7 @@ void initialize_processes() {
             }
             case 1: {
                 PCB_1.BAR = i * 100;
+                PCB_1.EAR = PCB_1.BAR;
                 PCB_1.time_slice = rand() % 10 + 1;
                 PCB_1.idNumber = 1;
                 PCB_1.next = &PCB_2;
@@ -62,15 +64,16 @@ void initialize_processes() {
             }
             case 2: {
                 PCB_2.BAR = i * 100;
+                PCB_2.EAR = PCB_2.BAR;
                 PCB_2.time_slice = rand() % 10 + 1;
                 PCB_2.idNumber = 2;
                 PCB_2.next = &PCB_3;
-                //PCB_2.program_lines = 0;
                 active_process = &PCB_2;
                 break;
             }
             case 3: {
                 PCB_3.BAR = i * 100;
+                PCB_3.EAR = PCB_3.BAR;
                 PCB_3.time_slice = rand() % 10 + 1;
                 PCB_3.idNumber = 3;
                 PCB_3.next = &PCB_4;
@@ -79,6 +82,7 @@ void initialize_processes() {
             }
             case 4: {
                 PCB_4.BAR = i * 100;
+                PCB_4.EAR = PCB_4.BAR;
                 PCB_4.time_slice = rand() % 10 + 1;
                 PCB_4.idNumber = 4;
                 PCB_4.next = &PCB_5;
@@ -87,6 +91,7 @@ void initialize_processes() {
             }
             case 5: {
                 PCB_5.BAR = i * 100;
+                PCB_5.EAR = PCB_5.BAR;
                 PCB_5.time_slice = rand() % 10 + 1;
                 PCB_5.idNumber = 5;
                 PCB_5.next = &PCB_6;
@@ -95,6 +100,7 @@ void initialize_processes() {
             }
             case 6: {
                 PCB_6.BAR = i * 100;
+                PCB_6.EAR = PCB_6.BAR;
                 PCB_6.time_slice = rand() % 10 + 1;
                 PCB_6.idNumber = 6;
                 PCB_6.next = &PCB_7;
@@ -103,6 +109,7 @@ void initialize_processes() {
             }
             case 7: {
                 PCB_7.BAR = i * 100;
+                PCB_7.EAR = PCB_7.BAR;
                 PCB_7.time_slice = rand() % 10 + 1;
                 PCB_7.idNumber = 7;
                 PCB_7.next = &PCB_8;
@@ -111,6 +118,7 @@ void initialize_processes() {
             }
             case 8: {
                 PCB_8.BAR = i * 100;
+                PCB_8.EAR = PCB_8.BAR;
                 PCB_8.time_slice = rand() % 10 + 1;
                 PCB_8.idNumber = 8;
                 PCB_8.next = &PCB_9;
@@ -119,6 +127,7 @@ void initialize_processes() {
             }
             case 9: {
                 PCB_9.BAR = i * 100;
+                PCB_9.EAR = PCB_9.BAR;
                 PCB_9.time_slice = rand() % 10 + 1;
                 PCB_9.idNumber = 9;
                 PCB_9.next = NULL;
