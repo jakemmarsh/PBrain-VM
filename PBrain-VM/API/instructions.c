@@ -481,7 +481,7 @@ void compare_lesser_immediate(int value) {
 void branch_if_true(int new_program_line) {
     if(active_process->PSW[0] == 1) {
         // have to subtract one to account for line numbers starting at 0, not 1
-        active_process->PC = new_program_line - 1;
+        active_process->EAR = (new_program_line - 1) + active_process->BAR;
     }
 }
 
@@ -489,14 +489,14 @@ void branch_if_true(int new_program_line) {
 void branch_if_false(int new_program_line) {
     if(active_process->PSW[0] == 0) {
         // have to subtract one to account for line numbers starting at 0, not 1
-        active_process->PC = new_program_line - 1;
+        active_process->EAR = (new_program_line - 1) + active_process->BAR;
     }
 }
 
 // BRANCH UNCONDITIONAL (28 XX --)
 void unconditional_branch(int new_program_line) {
     // have to subtract one to account for line numbers starting at 0, not 1
-    active_process->PC = new_program_line - 1;
+    active_process->EAR = (new_program_line - 1) + active_process->BAR;
 }
 
 // LOAD REGISTER FROM ACCUMULATOR (29 Rn --)
@@ -581,4 +581,9 @@ void halt() {
         IR[k] = memory[active_process->EAR][k];
     }
     printf("NEW PROCESS FIRST INSTRUCTION: %s\n\n", IR);
+    int opcode = (int) (IR[0] - 48) * 10;
+    opcode += (int) (IR[1] - 48);
+    if(opcode == 99) {
+        exit(0);
+    }
 }
