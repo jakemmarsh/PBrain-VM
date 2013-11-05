@@ -74,7 +74,7 @@ void switch_processes();
 void execute_opcode(int opcode);
 
 // LINKED LIST FUNCTIONS
-struct process* get_prev(struct process *process_to_find_prev);
+struct process* get_prev(int pid);
 struct process* get_last();
 
 #endif

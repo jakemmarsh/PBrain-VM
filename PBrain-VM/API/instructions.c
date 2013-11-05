@@ -616,8 +616,8 @@ void halt() {
     active_process->IC = 0;
     
     // set previous item in linked list to link to current item's "next"
-    if(get_prev(active_process)) {
-        get_prev(active_process)->next = active_process->next;
+    if(get_prev(active_process->idNumber)) {
+        get_prev(active_process->idNumber)->next = active_process->next;
     }
 
     // if a process still exists to complete, switch to it
