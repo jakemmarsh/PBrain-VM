@@ -70,6 +70,8 @@ void switch_processes() {
     active_process->next = NULL;
     // change active process to old "next" value
     active_process = tempNext;
+    // set ready_queue (top of linked list) to new active process
+    ready_queue = active_process;
     
     // print out data about new process that is beginning
     printf("NEW PROCESS ID: %d\n", active_process->idNumber);
