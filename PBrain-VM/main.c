@@ -37,12 +37,6 @@ char memory[1000][6];
 int opcode;
 int program_line;
 
-// PROCESS CONTROL BLOCKS
-struct process *PCB_0, *PCB_1, *PCB_2, *PCB_3, *PCB_4, *PCB_5, *PCB_6, *PCB_7, *PCB_8, *PCB_9;
-
-// keep track of current process for sending to instructions
-struct process *active_process;
-
 int main(int argc, const char * argv[]) {
     // use current time to generate random numbers, in order to be more "random"
     srand((unsigned)time(NULL));
@@ -51,7 +45,7 @@ int main(int argc, const char * argv[]) {
     initialize_processes();
     
     // set active process to first one in the linked list
-    active_process = PCB_0;
+    active_process = ready_queue;
 
     // execute all code read in from source
     while (active_process->PC <= active_process->program_lines) {

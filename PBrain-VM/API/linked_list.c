@@ -17,7 +17,7 @@
 struct process* get_prev(int pid) {
     struct process *next_node = ready_queue;
     
-    while(next_node) {
+    while(next_node->next) {
         if(next_node->next->idNumber == pid) {
             return next_node;
         }
@@ -30,7 +30,7 @@ struct process* get_prev(int pid) {
 struct process* get_last() {
     struct process *next_node = ready_queue;
     
-    while(next_node) {
+    while(next_node->next) {
         next_node = next_node->next;
     }
     

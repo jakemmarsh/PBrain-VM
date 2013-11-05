@@ -10,6 +10,7 @@
 #define FILE_READER_INCLUDED
 
 int open_file(const char * fileName);
+void create_process(int i);
 void initialize_processes();
 
 #endif

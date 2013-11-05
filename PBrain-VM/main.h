@@ -53,7 +53,7 @@ struct process {
     char PSW[2];
 };
 
-extern struct process *ready_queue, *active_process;
+struct process *ready_queue, *active_process;
 
 // SEMAPHORE
 struct semaphore {
@@ -61,7 +61,7 @@ struct semaphore {
     int count;
 };
 
-extern struct semaphore *SEM[10];
+struct semaphore *SEM[10];
 
 // PROGRAM MEMORY
 extern char memory[1000][6];
