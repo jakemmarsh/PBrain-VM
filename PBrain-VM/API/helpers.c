@@ -212,7 +212,7 @@ void execute_opcode(int opcode) {
             break;
         }
         case 32: {
-            trap(get_int_param(2, 2), get_int_param(4, 2));
+            trap(get_int_param(2, 2), active_process->idNumber);
             break;
         }
         case 99: {
