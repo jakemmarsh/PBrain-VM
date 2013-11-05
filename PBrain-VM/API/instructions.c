@@ -1,5 +1,5 @@
 //
-//  API.c
+//  instructions.c
 //  PBrain-VM
 //
 //  by Jake Marsh
@@ -538,6 +538,62 @@ void register_to_acc(char register_name[2]) {
     if(!strcmp(register_name, "R3")) {
         active_process->ACC = active_process->R3;
         return;
+    }
+}
+
+// MOD INSTRUCTION (31 Rn Rn)
+void mod(char register_one[2], char register_two[2]) {
+    int temp_one, temp_two;
+    
+    // get value from correct first register
+    if(!strcmp(register_one, "R0")) {
+        temp_one = active_process->R0;
+    }
+    if(!strcmp(register_one, "R1")) {
+        temp_one = active_process->R1;
+    }
+    if(!strcmp(register_one, "R2")) {
+        temp_one = active_process->R2;
+    }
+    if(!strcmp(register_one, "R3")) {
+        temp_one = active_process->R3;
+    }
+    
+    // get value from correct second register
+    if(!strcmp(register_two, "R0")) {
+        temp_two = active_process->R0;
+    }
+    if(!strcmp(register_two, "R1")) {
+        temp_two = active_process->R1;
+    }
+    if(!strcmp(register_two, "R2")) {
+        temp_two = active_process->R2;
+    }
+    if(!strcmp(register_two, "R3")) {
+        temp_two = active_process->R3;
+    }
+    
+    // store result value
+    active_process->ACC = temp_one / temp_two;
+}
+
+// REQUEST A SYSTEM CALL (32 XX XX)
+void trap(int system_call, int pid) {
+    switch(system_call) {
+        case 0: {
+            system_getpid();
+            break;
+        }
+        case 1: {
+            system_wait(pid, active_process->R0);
+        }
+        case 2: {
+            system_signal(pid, active_process->R0);
+        }
+        default: {
+            printf("Invalid system call\n");
+            break;
+        }
     }
 }
 

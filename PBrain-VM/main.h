@@ -57,6 +57,14 @@ extern struct process *PCB_0, *PCB_1, *PCB_2, *PCB_3, *PCB_4, *PCB_5, *PCB_6, *P
 
 extern struct process *active_process;
 
+// SEMAPHORE
+struct semaphore {
+    struct process *sem_queue;
+    int count;
+};
+
+extern struct semaphore *SEM[10];
+
 // PROGRAM MEMORY
 extern char memory[1000][6];
 

@@ -53,7 +53,16 @@ void unconditional_branch(int new_program_line);
 void acc_to_register(char register_name[2]);
 void register_to_acc(char register_name[2]);
 
+void mod(char register_one[2], char register_two[2]);
+
+void trap(int system_call, int pid);
+
 void halt();
+
+// SYSTEM CALL FUNCTIONS
+void system_getpid();
+void system_wait(int pid, int sem_index);
+void system_signal(int pid, int sem_index);
 
 // HELPER FUNCTIONS
 void read_to_memory(int program_line, char input_line[7], int i);

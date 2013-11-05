@@ -207,6 +207,14 @@ void execute_opcode(int opcode) {
             register_to_acc(get_named_param(2));
             break;
         }
+        case 31: {
+            mod(get_named_param(2), get_named_param(4));
+            break;
+        }
+        case 32: {
+            trap(get_int_param(2, 2), get_int_param(4, 2));
+            break;
+        }
         case 99: {
             halt();
             break;
