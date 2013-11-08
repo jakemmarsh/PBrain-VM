@@ -9,6 +9,8 @@
 #ifndef API_INCLUDED
 #define API_INCLUDED
 
+extern int external_switch;
+
 
 // INSTRUCTION FUNCTIONS
 void load_pointer_immediate(char pointer[2], int value);
@@ -74,7 +76,7 @@ void switch_processes();
 void execute_opcode(int opcode);
 
 // LINKED LIST FUNCTIONS
-struct process* get_prev(int pid);
-struct process* get_last();
+struct process* get_prev_rq(int pid);
+struct process* get_last_rq();
 
 #endif

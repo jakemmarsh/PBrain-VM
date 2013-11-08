@@ -14,7 +14,7 @@
 // INCLUDE MAIN HEADER FILE TO ACCESS VARIABLES
 #include "../main.h"
 
-struct process* get_prev(int pid) {
+struct process* get_prev_rq(int pid) {
     struct process *next_node = ready_queue;
     
     while(next_node->next) {
@@ -27,7 +27,7 @@ struct process* get_prev(int pid) {
     return NULL;
 }
 
-struct process* get_last() {
+struct process* get_last_rq() {
     struct process *next_node = ready_queue;
     
     while(next_node->next) {
@@ -35,4 +35,8 @@ struct process* get_last() {
     }
     
     return next_node;
+}
+
+void remove_node_rq(struct process* node) {
+    get_prev_rq(node->idNumber)->next = node->next;
 }

@@ -68,10 +68,16 @@ int main(int argc, const char * argv[]) {
         
         // make call to api to execute relevant function for opcode
         execute_opcode(opcode);
-        active_process->IC++;
         
-        // increment PC for process, as well as the EAR accordingly
-        active_process->PC++;
-        active_process->EAR = active_process->BAR + active_process->PC;
+        // only increment values if processes weren't switched in the 'halt' function
+        if(!external_switch) {
+            active_process->IC++;
+        
+            // increment PC for process, as well as the EAR accordingly
+            active_process->PC++;
+            active_process->EAR = active_process->BAR + active_process->PC;
+        }
+        // reset value
+        external_switch = 0;
     }
 }

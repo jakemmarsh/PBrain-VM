@@ -34,7 +34,6 @@ void system_wait(int pid, int sem_index) {
     
     // if resulting count is >= 0, OS continues normally
     else if(SEM[sem_index]->count >= 0) {
-        
     }
 }
 

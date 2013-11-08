@@ -16,6 +16,8 @@
 // INCLUDE MAIN HEADER FILE TO ACCESS VARIABLES
 #include "../main.h"
 
+int external_switch = 0;
+
 // LOAD POINTER IMMEDIATE (00 Pn XX)
 void load_pointer_immediate(char* pointer, int value) {
     // insert value into correct pointer variable
@@ -481,6 +483,7 @@ void compare_lesser_immediate(int value) {
 void branch_if_true(int new_program_line) {
     if(active_process->PSW[0] == 1) {
         // have to subtract one to account for line numbers starting at 0, not 1
+        active_process->PC = (new_program_line - 1);
         active_process->EAR = (new_program_line - 1) + active_process->BAR;
     }
 }
@@ -489,6 +492,7 @@ void branch_if_true(int new_program_line) {
 void branch_if_false(int new_program_line) {
     if(active_process->PSW[0] == 0) {
         // have to subtract one to account for line numbers starting at 0, not 1
+        active_process->PC = (new_program_line - 1);
         active_process->EAR = (new_program_line - 1) + active_process->BAR;
     }
 }
@@ -496,6 +500,7 @@ void branch_if_false(int new_program_line) {
 // BRANCH UNCONDITIONAL (28 XX --)
 void unconditional_branch(int new_program_line) {
     // have to subtract one to account for line numbers starting at 0, not 1
+    active_process->PC = (new_program_line - 1);
     active_process->EAR = (new_program_line - 1) + active_process->BAR;
 }
 
@@ -599,34 +604,34 @@ void trap(int system_call, int pid) {
 
 // HALT (99 XX XX)
 void halt() {
+    // if a process still exists to complete
     if(active_process->next) {
         // print out data about old process that is stopping
         printf("\nOLD PROCESS ID: %d\n", active_process->idNumber);
         printf("OLD PROCESS TIME SLICE: %d\n", active_process->time_slice);
         printf("OLD PROCESS LAST INSTRUCTION: %s\n\n", IR);
+        
+        // set instruction counter back to zero
+        active_process->IC = 0;
+        
+        // switch to next process
+        active_process = active_process->next;
+        // set flag for main.c
+        external_switch = 1;
     }
+    // otherwise, stop program
     else {
         // print out data about old process that is stopping
         printf("\nLAST PROCESS ID: %d\n", active_process->idNumber);
         printf("LAST PROCESS TIME SLICE: %d\n", active_process->time_slice);
         printf("LAST PROCESS LAST INSTRUCTION: %s\n\n", IR);
+        
+        exit(0);
     }
-    
-    // set instruction counter back to zero
-    active_process->IC = 0;
     
     // set previous item in linked list to link to current item's "next"
-    if(get_prev(active_process->idNumber)) {
-        get_prev(active_process->idNumber)->next = active_process->next;
-    }
-
-    // if a process still exists to complete, switch to it
-    if(active_process->next) {
-        active_process = active_process->next;
-    }
-    // otherwise, stop program
-    else {
-        exit(0);
+    if(get_prev_rq(active_process->idNumber)) {
+        get_prev_rq(active_process->idNumber)->next = active_process->next;
     }
     
     // print out data about new process that is beginning

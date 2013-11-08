@@ -47,7 +47,7 @@ void create_process(int i) {
         ready_queue = new_process;
     }
     else {
-        get_last()->next = new_process;
+        get_last_rq()->next = new_process;
     }
     
     active_process = new_process;
