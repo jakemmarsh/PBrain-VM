@@ -604,6 +604,10 @@ void trap(int system_call, int pid) {
 
 // HALT (99 XX XX)
 void halt() {
+    // set previous item in linked list to link to current item's "next"
+    if(get_prev_rq(active_process->idNumber)) {
+        get_prev_rq(active_process->idNumber)->next = active_process->next;
+    }
     // if a process still exists to complete
     if(active_process->next) {
         // print out data about old process that is stopping
@@ -618,6 +622,20 @@ void halt() {
         active_process = active_process->next;
         // set flag for main.c
         external_switch = 1;
+        
+        // print out data about new process that is beginning
+        printf("NEW PROCESS ID: %d\n", active_process->idNumber);
+        printf("NEW PROCESS TIME SLICE: %d\n", active_process->time_slice);
+        // copy current line into the instruction register (IR) for printing
+        for (k = 0; k < 6; k++) {
+            IR[k] = memory[active_process->EAR][k];
+        }
+        printf("NEW PROCESS FIRST INSTRUCTION: %s\n\n", IR);
+        int opcode = (int) (IR[0] - 48) * 10;
+        opcode += (int) (IR[1] - 48);
+        if(opcode == 99) {
+            exit(0);
+        }
     }
     // otherwise, stop program
     else {
@@ -626,25 +644,6 @@ void halt() {
         printf("LAST PROCESS TIME SLICE: %d\n", active_process->time_slice);
         printf("LAST PROCESS LAST INSTRUCTION: %s\n\n", IR);
         
-        exit(0);
-    }
-    
-    // set previous item in linked list to link to current item's "next"
-    if(get_prev_rq(active_process->idNumber)) {
-        get_prev_rq(active_process->idNumber)->next = active_process->next;
-    }
-    
-    // print out data about new process that is beginning
-    printf("NEW PROCESS ID: %d\n", active_process->idNumber);
-    printf("NEW PROCESS TIME SLICE: %d\n", active_process->time_slice);
-    // copy current line into the instruction register (IR) for printing
-    for (k = 0; k < 6; k++) {
-        IR[k] = memory[active_process->EAR][k];
-    }
-    printf("NEW PROCESS FIRST INSTRUCTION: %s\n\n", IR);
-    int opcode = (int) (IR[0] - 48) * 10;
-    opcode += (int) (IR[1] - 48);
-    if(opcode == 99) {
         exit(0);
     }
 }
