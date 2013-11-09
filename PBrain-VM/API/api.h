@@ -5,6 +5,9 @@
 //  by Jake Marsh
 //
 
+// INCLUDE MAIN HEADER FILE TO ACCESS VARIABLES
+#include "../main.h"
+
 // ONLY LOAD HEADER FILE ONCE
 #ifndef API_INCLUDED
 #define API_INCLUDED
@@ -78,5 +81,10 @@ void execute_opcode(int opcode);
 // LINKED LIST FUNCTIONS
 struct process* get_prev_rq(int pid);
 struct process* get_last_rq();
+void remove_node_rq(struct process* node);
+struct process* get_prev_sem_queue(int pid, struct semaphore* semaphore);
+struct process* get_last_sem_queue(struct semaphore* semaphore);
+void remove_node_sem_queue(struct process* node, struct semaphore* semaphore);
+
 
 #endif

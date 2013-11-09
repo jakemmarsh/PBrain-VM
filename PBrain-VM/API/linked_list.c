@@ -38,5 +38,36 @@ struct process* get_last_rq() {
 }
 
 void remove_node_rq(struct process* node) {
-    get_prev_rq(node->idNumber)->next = node->next;
+    if(get_prev_rq(node->idNumber)) {
+        get_prev_rq(node->idNumber)->next = node->next;
+    }
+}
+
+struct process* get_prev_sem_queue(int pid, struct semaphore* semaphore) {
+    struct process *next_node = semaphore->sem_queue;
+    
+    while(next_node->next) {
+        if(next_node->next->idNumber == pid) {
+            return next_node;
+        }
+        next_node = next_node->next;
+    }
+    
+    return NULL;
+}
+
+struct process* get_last_sem_queue(struct semaphore* semaphore) {
+    struct process *next_node = semaphore->sem_queue;
+    
+    while(next_node->next) {
+        next_node = next_node->next;
+    }
+    
+    return next_node;
+}
+
+void remove_node_sem_queue(struct process* node, struct semaphore* semaphore) {
+    if(get_prev_sem_queue(node->idNumber, semaphore)) {
+        get_prev_sem_queue(node->idNumber, semaphore)->next = node->next;
+    }
 }
