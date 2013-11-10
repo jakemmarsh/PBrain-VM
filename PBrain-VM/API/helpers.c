@@ -59,9 +59,7 @@ void switch_processes() {
     active_process->IC = 0;
     
     // set previous item in linked list to link to current item's "next"
-    if(get_prev_rq(active_process->idNumber)) {
-        get_prev_rq(active_process->idNumber)->next = active_process->next;
-    }
+    remove_node_rq(active_process);
     
     // set last item in linked list to link to current item
     get_last_rq()->next = active_process;
