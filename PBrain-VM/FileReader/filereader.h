@@ -1,5 +1,5 @@
 //
-//  FileReader.h
+//  filereader.h
 //  PBrain-VM
 //
 //  by Jake Marsh

@@ -1,12 +1,12 @@
 //
-//  FileReader.c
+//  filereader.c
 //  PBrain-VM
 //
 //  by Jake Marsh
 //
 
 // INCLUDE HEADER FILE
-#include "FileReader.h"
+#include "filereader.h"
 
 #include "../main.h"
 #include "../API/api.h"

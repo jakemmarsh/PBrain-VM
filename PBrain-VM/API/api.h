@@ -1,5 +1,5 @@
 //
-//  API.h
+//  api.h
 //  PBrain-VM
 //
 //  by Jake Marsh
