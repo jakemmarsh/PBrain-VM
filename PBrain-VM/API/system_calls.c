@@ -45,7 +45,20 @@ void system_signal(int pid, int sem_index) {
     
     // if resulting count is <= 0, one or more processes are blocked and should be removed from the semaphore's queue and place at the tail of the ready queue
     if(SEM[sem_index]->count <= 0) {
+        // get top of sem queue
+        struct process* temp = SEM[sem_index]->sem_queue;
         
+        // move sem_queue up one if there are additional processes in the queue
+        if(SEM[sem_index]->sem_queue->next) {
+            SEM[sem_index]->sem_queue = SEM[sem_index]->sem_queue->next;
+        }
+        // otherwise set sem_queue to null
+        else {
+            SEM[sem_index]->sem_queue = NULL;
+        }
+        
+        // place process at tail of the ready queue
+        get_last_rq()->next = temp;
     }
     // never blocks the caller
 }
