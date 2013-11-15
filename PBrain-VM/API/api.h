@@ -82,6 +82,7 @@ void execute_opcode(int opcode);
 struct process* get_prev_rq(int pid);
 struct process* get_last_rq();
 void remove_node_rq(struct process* node);
+void remove_top_rq();
 struct process* get_prev_sem_queue(int pid, struct semaphore* semaphore);
 struct process* get_last_sem_queue(struct semaphore* semaphore);
 void remove_node_sem_queue(struct process* node, struct semaphore* semaphore);

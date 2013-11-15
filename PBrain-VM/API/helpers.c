@@ -50,35 +50,52 @@ int get_int_param(int start_position, int length) {
 }
 
 void switch_processes() {
-    // print out data about old process that is stopping
-    printf("\nOLD PROCESS ID: %d\n", active_process->idNumber);
-    printf("OLD PROCESS TIME SLICE: %d\n", active_process->time_slice);
-    printf("OLD PROCESS LAST INSTRUCTION: %s\n\n", IR);
-    
-    // set instruction counter back to zero
-    active_process->IC = 0;
-    
-    // set previous item in linked list to link to current item's "next"
-    remove_node_rq(active_process);
-    
-    // set last item in linked list to link to current item
-    get_last_rq()->next = active_process;
-    // set current item's "next" to null since it is now at the end
-    struct process *tempNext = active_process->next;
-    active_process->next = NULL;
-    // change active process to old "next" value
-    active_process = tempNext;
-    // set ready_queue (top of linked list) to new active process
-    ready_queue = active_process;
-    
-    // print out data about new process that is beginning
-    printf("NEW PROCESS ID: %d\n", active_process->idNumber);
-    printf("NEW PROCESS TIME SLICE: %d\n", active_process->time_slice);
-    // copy current line into the instruction register (IR) for printing
-    for (k = 0; k < 6; k++) {
-        IR[k] = memory[active_process->EAR][k];
+    // if a process still exists to complete
+    if(active_process->next) {
+        // print out data about old process that is stopping
+        printf("\nOLD PROCESS ID: %d\n", active_process->idNumber);
+        printf("OLD PROCESS TIME SLICE: %d\n", active_process->time_slice);
+        printf("OLD PROCESS LAST INSTRUCTION: %s\n\n", IR);
+        
+        // set instruction counter back to zero
+        active_process->IC = 0;
+        
+        get_last_rq()->next = active_process;
+        
+        struct process *temp_next = active_process->next;
+        active_process->next = NULL;
+        
+        // switch to next process
+        remove_node_rq(active_process);
+        active_process = temp_next;
+        ready_queue = active_process;
+        
+        // set flag for main.c
+        external_switch = 1;
+        
+        // print out data about new process that is beginning
+        printf("NEW PROCESS ID: %d\n", active_process->idNumber);
+        printf("NEW PROCESS TIME SLICE: %d\n", active_process->time_slice);
+        // copy current line into the instruction register (IR) for printing
+        for (k = 0; k < 6; k++) {
+            IR[k] = memory[active_process->EAR][k];
+        }
+        printf("NEW PROCESS FIRST INSTRUCTION: %s\n\n", IR);
+        int opcode = (int) (IR[0] - 48) * 10;
+        opcode += (int) (IR[1] - 48);
+        if(opcode == 99) {
+            exit(0);
+        }
     }
-    printf("NEW PROCESS FIRST INSTRUCTION: %s\n\n", IR);
+    // otherwise, stop program
+    else {
+        // print out data about old process that is stopping
+        printf("\nLAST PROCESS ID: %d\n", active_process->idNumber);
+        printf("LAST PROCESS TIME SLICE: %d\n", active_process->time_slice);
+        printf("LAST PROCESS LAST INSTRUCTION: %s\n\n", IR);
+        
+        exit(0);
+    }
 }
 
 void execute_opcode(int opcode) {

@@ -43,6 +43,10 @@ void remove_node_rq(struct process* node) {
     }
 }
 
+void remove_top_rq() {
+    ready_queue = ready_queue->next;
+}
+
 struct process* get_prev_sem_queue(int pid, struct semaphore* semaphore) {
     struct process *current_process = semaphore->sem_queue;
     
