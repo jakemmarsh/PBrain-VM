@@ -15,26 +15,26 @@
 #include "../main.h"
 
 struct process* get_prev_rq(int pid) {
-    struct process *next_node = ready_queue;
+    struct process *current_process = ready_queue;
     
-    while(next_node->next) {
-        if(next_node->next->idNumber == pid) {
-            return next_node;
+    while(current_process->next) {
+        if(current_process->next->idNumber == pid) {
+            return current_process;
         }
-        next_node = next_node->next;
+        current_process = current_process->next;
     }
     
     return NULL;
 }
 
 struct process* get_last_rq() {
-    struct process *next_node = ready_queue;
+    struct process *current_process = ready_queue;
     
-    while(next_node->next) {
-        next_node = next_node->next;
+    while(current_process->next) {
+        current_process = current_process->next;
     }
     
-    return next_node;
+    return current_process;
 }
 
 void remove_node_rq(struct process* node) {
@@ -44,26 +44,27 @@ void remove_node_rq(struct process* node) {
 }
 
 struct process* get_prev_sem_queue(int pid, struct semaphore* semaphore) {
-    struct process *next_node = semaphore->sem_queue;
+    struct process *current_process = semaphore->sem_queue;
     
-    while(next_node->next) {
-        if(next_node->next->idNumber == pid) {
-            return next_node;
+    while(current_process->next) {
+        if(current_process->next->idNumber == pid) {
+            return current_process;
         }
-        next_node = next_node->next;
+        current_process = current_process->next;
     }
     
     return NULL;
 }
 
 struct process* get_last_sem_queue(struct semaphore* semaphore) {
-    struct process *next_node = semaphore->sem_queue;
+    struct process *current_process = semaphore->sem_queue;
     
-    while(next_node->next) {
-        next_node = next_node->next;
+    printf("current process id: %d\n", current_process->idNumber);
+    while(current_process->next) {
+        current_process = current_process->next;
     }
     
-    return next_node;
+    return current_process;
 }
 
 void remove_node_sem_queue(struct process* node, struct semaphore* semaphore) {

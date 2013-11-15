@@ -220,7 +220,7 @@ void execute_opcode(int opcode) {
             break;
         }
         default: {
-            printf("Invalid opcode\n");
+            printf("Invalid opcode: %d\n", opcode);
             break;
         }
     }

@@ -591,12 +591,14 @@ void trap(int system_call, int pid) {
         }
         case 1: {
             system_wait(pid, active_process->R0);
+            break;
         }
         case 2: {
             system_signal(pid, active_process->R0);
+            break;
         }
         default: {
-            printf("Invalid system call\n");
+            printf("Invalid system call: %d\n", system_call);
             break;
         }
     }
