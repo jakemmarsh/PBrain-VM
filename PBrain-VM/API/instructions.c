@@ -579,7 +579,7 @@ void mod(char register_one[2], char register_two[2]) {
     }
     
     // store result value
-    active_process->ACC = temp_one / temp_two;
+    active_process->ACC = temp_one % temp_two;
 }
 
 // REQUEST A SYSTEM CALL (32 XX XX)
@@ -618,9 +618,10 @@ void halt() {
         
         // set instruction counter back to zero
         active_process->IC = 0;
-        
+    
         // switch to next process
         active_process = active_process->next;
+        
         // set flag for main.c
         external_switch = 1;
         
