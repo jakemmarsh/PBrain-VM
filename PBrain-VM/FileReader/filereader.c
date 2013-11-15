@@ -53,6 +53,16 @@ void create_process(int i) {
     active_process = new_process;
 }
 
+void initialize_semaphores() {
+    struct semaphore *blank = (struct semaphore *)malloc(sizeof(struct semaphore));
+    blank->count = 1;
+    blank->sem_queue = NULL;
+    
+    for(int i = 0; i < 10; i++) {
+        SEM[i] = blank;
+    }
+}
+
 void initialize_processes() {
     // loop through all ten files, opening them and reading into corresponding memory locations
     for(i = 0; i <= 9; i++) {

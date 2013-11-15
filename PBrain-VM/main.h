@@ -57,8 +57,8 @@ struct process *ready_queue, *active_process;
 
 // SEMAPHORE
 struct semaphore {
-    struct process *sem_queue;
     int count;
+    struct process *sem_queue;
 };
 
 struct semaphore *SEM[10];

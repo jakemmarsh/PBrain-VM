@@ -41,6 +41,9 @@ int main(int argc, const char * argv[]) {
     // use current time to generate random numbers, in order to be more "random"
     srand((unsigned)time(NULL));
     
+    // make call to filereader to create all semaphores with a starting count of 1
+    initialize_semaphores();
+    
     // make call to filereader to open all files and initialize process blocks
     initialize_processes();
     

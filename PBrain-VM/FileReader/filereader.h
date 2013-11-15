@@ -11,6 +11,7 @@
 
 int open_file(const char * fileName);
 void create_process(int i);
+void initialize_semaphores();
 void initialize_processes();
 
 #endif
