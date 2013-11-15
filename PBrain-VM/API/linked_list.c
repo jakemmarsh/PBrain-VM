@@ -67,7 +67,6 @@ struct process* get_last_sem_queue(struct semaphore* semaphore) {
     while(current_process->next) {
         current_process = current_process->next;
     }
-    
     return current_process;
 }
 

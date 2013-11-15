@@ -54,11 +54,11 @@ void create_process(int i) {
 }
 
 void initialize_semaphores() {
-    struct semaphore *blank = (struct semaphore *)malloc(sizeof(struct semaphore));
-    blank->count = 1;
-    blank->sem_queue = NULL;
-    
     for(int i = 0; i < 10; i++) {
+        struct semaphore *blank = (struct semaphore *)malloc(sizeof(struct semaphore));
+        blank->count = 1;
+        blank->sem_queue = NULL;
+        
         SEM[i] = blank;
     }
 }
