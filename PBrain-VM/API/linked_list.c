@@ -63,7 +63,6 @@ struct process* get_prev_sem_queue(int pid, struct semaphore* semaphore) {
 struct process* get_last_sem_queue(struct semaphore* semaphore) {
     struct process *current_process = semaphore->sem_queue;
     
-    printf("current process id: %d\n", current_process->idNumber);
     while(current_process->next) {
         current_process = current_process->next;
     }
