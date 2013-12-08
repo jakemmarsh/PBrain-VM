@@ -25,11 +25,12 @@ void read_to_memory(int program_line, char input_line[7], int i) {
 // EXTRACT NAMED PARAM FROM AN INSTRUCTION, SUCH AS A POINTER OR REGISTER NAME
 char * get_named_param(int start_position) {
     char tempParam[3];
+    char* param;
     
     memcpy(tempParam, &IR[start_position], 2);
     tempParam[2] = '\0';
     
-    char* param = malloc(2);
+    param = malloc(2);
     
     strcpy(param, tempParam);
 
@@ -38,9 +39,8 @@ char * get_named_param(int start_position) {
 
 // EXTRACT AN INTEGER PARAM FROM AN INSTRUCTION
 int get_int_param(int start_position, int length) {
-    int i;
-    
-    int value = (int) (IR[start_position] - 48) * (pow(10, length-1));
+    int i,
+    value = (int) (IR[start_position] - 48) * (pow(10, length-1));
     
     for (i = 1; i < length; i++) {
         value += (int) (IR[start_position + i] - 48) * (pow(10, length-(i+1)));
@@ -50,6 +50,7 @@ int get_int_param(int start_position, int length) {
 }
 
 void switch_processes() {
+    int k;
     // if a process still exists to complete
     if(active_process->next) {
         // print out data about old process that is stopping

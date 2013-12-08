@@ -22,26 +22,24 @@
 #include "FileReader/filereader.h"
 
 // These variables are associated with the implementation of the VM
-int fp;
+int fp, i, j, k;
 char *ptr;
-int i, j, k;
 char input_line[7];
 
 // These are variables representing the VM itself
 char IR[6];
 
 // PROGRAM MEMORY
-char memory[1000][6];
+char memory[2000][6];
 
 // to keep track of what we're doing
-int opcode;
-int program_line;
+int opcode, program_line;
 
 int main(int argc, const char * argv[]) {
     // use current time to generate random numbers, in order to be more "random"
     srand((unsigned)time(NULL));
     
-    // make call to filereader to create all semaphores with a starting count of 1
+    // make call to filereader to create all semaphores
     initialize_semaphores();
     
     // make call to filereader to open all files and initialize process blocks
