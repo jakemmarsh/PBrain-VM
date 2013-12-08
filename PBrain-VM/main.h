@@ -16,6 +16,13 @@ extern char input_line[7];
 // These are variables representing the VM itself
 extern char IR[6];
 
+// PAGE TABLE ENTRY
+struct page_table_entry {
+    // VALID/INVALID BIT
+    int validity,
+    // BASE ADDRESS OF PAGE FRAME IN PHYSICAL MEMORY
+    base_address;
+};
 
 // PROCESS CONTROL BLOCK
 struct process {
@@ -40,6 +47,8 @@ struct process {
     program_lines,
     idNumber;
     char PSW[2];
+    // PAGE TABLE
+    struct page_table_entry page_table[10];
 };
 
 struct process *ready_queue, *active_process;
