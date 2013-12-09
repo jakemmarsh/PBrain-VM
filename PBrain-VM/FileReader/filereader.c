@@ -46,6 +46,15 @@ void create_process(int i, int n_size, int mem_locations) {
     new_process->idNumber = i;
     new_process->next = NULL;
     
+    // create all 10 page table entries for new process
+    for(int i = 0; i < 10; i++) {
+        struct page_table_entry *entry = (struct page_table_entry *)malloc(sizeof(struct page_table_entry));
+        new_process->page_table[i] = entry;
+        
+        // do more here??
+    }
+    
+    // place new process in the ready queue
     if(ready_queue == NULL) {
         ready_queue = new_process;
     }

@@ -48,7 +48,7 @@ struct process {
     idNumber;
     char PSW[2];
     // PAGE TABLE
-    struct page_table_entry page_table[10];
+    struct page_table_entry *page_table[10];
 };
 
 struct process *ready_queue, *active_process;
