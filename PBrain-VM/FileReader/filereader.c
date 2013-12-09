@@ -37,7 +37,7 @@ int open_file(const char * fileName) {
 }
 
 // takes an int (i) as a parameter. Creates a new process with all the corresponding values and places it on the ready queue
-void create_process(int i) {
+void create_process(int i, int n_size, int mem_locations) {
     struct process *new_process = (struct process *)malloc(sizeof(struct process));
     
     new_process->BAR = i * 100;
@@ -72,14 +72,11 @@ void initialize_semaphores() {
 // open text file and read program into memory
 void read_file(int program_number) {
     char file_name[15];
-    int ret, i, j;
+    int ret, i, j, n_size, mem_locations;
     
     sprintf(file_name, "program_%d.txt", program_number);
     
     program_line = program_number * 100;
-    
-    // create new process control block
-    create_process(program_number);
     
     // call function to open the program file.
     // call will also check the return value
@@ -94,11 +91,26 @@ void read_file(int program_number) {
     while (ret > 0) {
         // first line declares size of N
         if(i == 0) {
+            // copy input line into IR to get integer from it
+            for (j = 0; j < 6; j++) {
+                IR[j] = input_line[j];
+            }
             
+            // get size of N from IR
+            n_size = get_int_param(2, 4);
         }
         // second line declares number of memory locations required
         else if(i == 1) {
+            // copy input line into IR to get integer from it
+            for (j = 0; j < 6; j++) {
+                IR[j] = input_line[j];
+            }
             
+            // get number of memory locations from IR
+            mem_locations = get_int_param(2, 4);
+            
+            // create new process control block
+            create_process(program_number, n_size, mem_locations);
         }
         // read body of program into memory
         else {
