@@ -40,7 +40,7 @@ struct process {
     // TOTAL NUMBER OF LINES IN PROCESS'S PROGRAM
     program_lines,
     idNumber;
-    char PSW[2];
+    int PSW[2];
     // PAGE TABLE
     struct page_table_entry *page_table[10];
     // 2D ARRAY TO GET MEMORY ADDRESS FROM VIRTUAL ADDRESS

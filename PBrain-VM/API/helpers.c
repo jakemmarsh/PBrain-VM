@@ -70,6 +70,7 @@ void switch_processes() {
         // print out data about new process that is beginning
         printf("NEW PROCESS ID: %d\n", active_process->idNumber);
         printf("NEW PROCESS TIME SLICE: %d\n", active_process->time_slice);
+        
         // copy current line into the instruction register (IR) for printing
         int memory_address = get_memory_address(active_process, active_process->PC);
         for (k = 0; k < 6; k++) {
@@ -78,35 +79,62 @@ void switch_processes() {
         printf("NEW PROCESS FIRST INSTRUCTION: %s\n\n", IR);
         opcode = (int) (IR[0] - 48) * 10;
         opcode += (int) (IR[1] - 48);
-        if(opcode == 99) {
+        if(opcode == 99 && !processes_remain()) {
             exit(0);
         }
     }
-    else {
-        // check if any files still need to be read into memory
+    else if(processes_remain()) {
+        // search for files that still need to be read into memory
         for(int i = 0; i < 20; i++) {
             if(waiting_queue[i] == 1) {
-                // read file
-                read_file(i);
+                // switch to next process
+                remove_node_rq(active_process);
                 
-                // reset flag
-                waiting_queue[i] = 0;
-                
-                // print out data about new process that is beginning
-                printf("NEW PROCESS ID: %d\n", active_process->idNumber);
-                printf("NEW PROCESS TIME SLICE: %d\n", active_process->time_slice);
-                // copy current line into the instruction register (IR) for printing
-                int memory_address = get_memory_address(active_process, active_process->PC);
-                for (k = 0; k < 6; k++) {
-                    IR[k] = memory[memory_address][k];
+                printf("\n");
+                old_process = active_process;
+                // only make changes if a new file was actually opened
+                if(read_file(i)) {
+                    // print out data about old process that is stopping
+                    printf("OLD PROCESS ID: %d\n", old_process->idNumber);
+                    printf("OLD PROCESS TIME SLICE: %d\n", old_process->time_slice);
+                    printf("OLD PROCESS LAST INSTRUCTION: %s\n\n", IR);
+                    
+                    // reset old process
+                    old_process->IC = 0;
+                    get_last_rq()->next = old_process;
+                    old_process->next = NULL;
+                    
+                    // change to new process
+                    ready_queue = active_process;
+                    
+                    // reset flag
+                    waiting_queue[i] = 0;
+                    
+                    // print out data about new process that is beginning
+                    printf("NEW PROCESS ID: %d\n", active_process->idNumber);
+                    printf("NEW PROCESS TIME SLICE: %d\n", active_process->time_slice);
+                    // copy current line into the instruction register (IR) for printing
+                    int memory_address = get_memory_address(active_process, active_process->PC);
+                    for (k = 0; k < 6; k++) {
+                        IR[k] = memory[memory_address][k];
+                    }
+                    printf("NEW PROCESS FIRST INSTRUCTION: %s\n\n", IR);
+                    opcode = (int) (IR[0] - 48) * 10;
+                    opcode += (int) (IR[1] - 48);
                 }
-                printf("NEW PROCESS FIRST INSTRUCTION: %s\n\n", IR);
+                else {
+                    // keep using same process if a new one was not successfully loaded
+                    active_process = old_process;
+                    active_process->next = NULL;
+                    ready_queue = active_process;
+                }
                 
                 return;
             }
         }
-        
-        // if no processes remain at all, print out data about old process that is stopping and exit
+    }
+    // if no processes remain at all, print out data about old process that is stopping and exit
+    else {
         printf("\nLAST PROCESS ID: %d\n", active_process->idNumber);
         printf("LAST PROCESS TIME SLICE: %d\n", active_process->time_slice);
         printf("LAST PROCESS LAST INSTRUCTION: %s\n\n", IR);
@@ -144,6 +172,11 @@ int get_memory_address(struct process *p, int line) {
     offset = p->virtual_address[line][1],
     memory_address = p->page_table[page]->base_address + offset;
     
+    if(page == -1) {
+        printf("That page number is invalid.\n");
+        exit(0);
+    }
+    
     return memory_address;
 }
 
@@ -163,6 +196,15 @@ void release_pages(struct process *p) {
             memory[memory_address][j] = 0;
         }
     }
+}
+
+int processes_remain() {
+    for(int i = 0; i < 20; i++) {
+        if(waiting_queue[i] == 1) {
+            return 1;
+        }
+    }
+    return 0;
 }
 
 void execute_opcode(int opcode) {

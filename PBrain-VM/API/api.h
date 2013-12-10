@@ -88,5 +88,6 @@ int find_new_page();
 int get_number_available_pages();
 int get_memory_address(struct process *p, int line);
 void release_pages(struct process *p);
+int processes_remain();
 
 #endif

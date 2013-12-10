@@ -53,7 +53,7 @@ int main(int argc, const char * argv[]) {
     // execute all code read in from source
     while (active_process->PC <= active_process->program_lines) {
         // if process has reached time slice, reset to zero, move to end of RQ, and start next process
-        if(active_process->IC == active_process->time_slice && active_process->next) {
+        if(active_process->IC == active_process->time_slice) {
             switch_processes();
         }
         
@@ -62,7 +62,8 @@ int main(int argc, const char * argv[]) {
         for (k = 0; k < 6; k++) {
             IR[k] = memory[memory_address][k];
         }
-        
+        //printf("PC within main: %d\n", active_process->PC);
+        //printf("memory address within main: %d\n", memory_address);
         // calculate integer equivalent of opcode chars
         opcode = (int) (IR[0] - 48) * 10;
         opcode += (int) (IR[1] - 48);

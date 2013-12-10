@@ -18,12 +18,14 @@
 struct process* get_prev_rq(int pid) {
     struct process *current_process = ready_queue;
     
-    // search for process node whose "next" value has a pid that matches the parameter pid
-    while(current_process->next) {
-        if(current_process->next->idNumber == pid) {
-            return current_process;
+    if(current_process) {
+        // search for process node whose "next" value has a pid that matches the parameter pid
+        while(current_process->next) {
+            if(current_process->next->idNumber == pid) {
+                return current_process;
+            }
+            current_process = current_process->next;
         }
-        current_process = current_process->next;
     }
     
     return NULL;
