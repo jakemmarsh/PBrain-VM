@@ -18,10 +18,8 @@ extern char IR[6];
 
 // PAGE TABLE ENTRY
 struct page_table_entry {
-    // VALID/INVALID BIT
-    int validity,
     // BASE ADDRESS OF PAGE FRAME IN PHYSICAL MEMORY
-    base_address;
+    int base_address;
 };
 
 // PROCESS CONTROL BLOCK
@@ -35,10 +33,6 @@ struct process {
     ACC,
     // INSTRUCTION COUNTER
     IC,
-    // BASE ADDRESS REGISTER
-    BAR,
-    // EFFECTIVE ADDRESS REGISTER (EAR = PC + BAR)
-    EAR,
     // TIME SLICE FOR PREEMPTING
     time_slice,
     // PROGRAM COUNTER
@@ -49,6 +43,8 @@ struct process {
     char PSW[2];
     // PAGE TABLE
     struct page_table_entry *page_table[10];
+    // 2D ARRAY TO GET MEMORY ADDRESS FROM VIRTUAL ADDRESS
+    int virtual_address[100][2];
 };
 
 struct process *ready_queue, *active_process;
@@ -61,8 +57,13 @@ struct semaphore {
 
 struct semaphore *SEM[10];
 
+int master_memory_table[100];
+
 // PROGRAM MEMORY
-extern char memory[2000][6];
+extern char memory[1000][6];
+
+// WAITING QUEUE
+int waiting_queue[20];
 
 // to keep track of what we're doing
 extern int opcode;

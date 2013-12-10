@@ -78,7 +78,6 @@ void system_signal(int pid, int sem_index) {
         
         get_last_rq()->IC++;
         get_last_rq()->PC++;
-        get_last_rq()->EAR = get_last_rq()->BAR + get_last_rq()->PC;
         
         // move sem_queue up one if there are additional processes in the queue
         if(get_prev_sem_queue(SEM[sem_index]->sem_queue->idNumber, SEM[sem_index])) {

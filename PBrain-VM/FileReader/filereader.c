@@ -18,14 +18,14 @@
 #include <fcntl.h>
 #include <time.h>
 
-int approach = 1;
+int approach = 2;
 
 // open a text file
 int open_file(const char * fileName) {
     int fp;
     
     fp = open(fileName, O_RDONLY);
-    printf("Open is: %d\n", fp);
+    printf("\nOpen is: %d\n", fp);
     
     // if error in read or EOF
     if (fp < 0) {
@@ -40,18 +40,15 @@ int open_file(const char * fileName) {
 void create_process(int i, int n_size, int mem_locations) {
     struct process *new_process = (struct process *)malloc(sizeof(struct process));
     
-    new_process->BAR = i * 100;
-    new_process->EAR = new_process->BAR;
-    new_process->time_slice = 500;
+    new_process->time_slice = rand() % 10 + 1;
     new_process->idNumber = i;
     new_process->next = NULL;
     
     // create all 10 page table entries for new process
     for(int i = 0; i < 10; i++) {
         struct page_table_entry *entry = (struct page_table_entry *)malloc(sizeof(struct page_table_entry));
+        entry->base_address = -1; // -1 means invalid entry
         new_process->page_table[i] = entry;
-        
-        // do more here??
     }
     
     // place new process in the ready queue
@@ -81,11 +78,11 @@ void initialize_semaphores() {
 // open text file and read program into memory
 void read_file(int program_number) {
     char file_name[15];
-    int ret, i, j, n_size, mem_locations;
+    int ret, i, j, n_size, mem_locations, page_address, page_number, starting_address;
     
     sprintf(file_name, "program_%d.txt", program_number);
     
-    program_line = program_number * 100;
+    program_line = 0;
     
     // call function to open the program file.
     // call will also check the return value
@@ -96,6 +93,15 @@ void read_file(int program_number) {
     
     // counter to keep track of what line is being read
     i = 0;
+    
+    page_number = -1;
+    
+    // raise flag and leave function if no pages left in memory
+    if(find_new_page() == -1) {
+        waiting_queue[program_number] = 1;
+        return;
+    }
+    
     // iterate through the rest of the source code
     while (ret > 0) {
         // first line declares size of N
@@ -118,13 +124,39 @@ void read_file(int program_number) {
             // get number of memory locations from IR
             mem_locations = get_int_param(2, 4);
             
+            // leave function if not enough pages are available for process
+            int pages_needed = 1 + ((mem_locations - 1) / 10);
+            if(pages_needed > get_number_available_pages()) {
+                waiting_queue[program_number] = 1;
+                return;
+            }
+            
             // create new process control block
             create_process(program_number, n_size, mem_locations);
         }
         // read body of program into memory
         else {
+            // if a new page is needed
+            if(program_line % 10 == 0) {
+                // switch to new page
+                page_address = find_new_page();
+                starting_address = page_address;
+                program_line = starting_address;
+                
+                // mark page as occupied by process
+                master_memory_table[page_address] = program_number;
+                
+                page_number += 1;
+                active_process->page_table[page_number]->base_address = program_line;
+            }
+            
+            // assign correct mapping from virtual to logical address
+            active_process->virtual_address[active_process->program_lines][0] = page_number;
+            active_process->virtual_address[active_process->program_lines][1] = active_process->program_lines % 10;
+            
+            // read line of program into memory
             for (j = 0; j < 6; j++) {
-                read_to_memory(program_line, input_line, j);
+                memory[program_line][j] = input_line[j];
             }
             
             // increment current line count to keep track
@@ -138,10 +170,32 @@ void read_file(int program_number) {
         // increment counter
         i++;
     }
+    
+    // reserve necessary extra memory spaces beyond just program lines
+    while(page_number * 10 < mem_locations) {
+        // switch to new page
+        page_address = find_new_page();
+        starting_address = page_address;
+        program_line = starting_address;
+        
+        // mark page as occupied by process
+        master_memory_table[page_address] = program_number;
+        
+        page_number += 1;
+        active_process->page_table[page_number]->base_address = program_line;
+    }
+
+    starting_address = page_address + 1;
 }
 
 void initialize_processes() {
     int i;
+    
+    // initialize master memory table
+    for(i = 0; i < 100; i++) {
+        master_memory_table[i] = -1; // -1 indicates an available page
+    }
+    
     // approach one: bring programs into memory in order (1-20)
     if(approach == 1) {
         // loop through all files, opening them and reading into corresponding memory locations

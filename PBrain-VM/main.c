@@ -30,7 +30,9 @@ char input_line[7];
 char IR[6];
 
 // PROGRAM MEMORY
-char memory[2000][6];
+char memory[1000][6];
+
+int waiting_queue[20] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 // to keep track of what we're doing
 int opcode, program_line;
@@ -53,12 +55,12 @@ int main(int argc, const char * argv[]) {
         // if process has reached time slice, reset to zero, move to end of RQ, and start next process
         if(active_process->IC == active_process->time_slice && active_process->next) {
             switch_processes();
-            continue;
         }
         
         // copy current line into the instruction register (IR)
+        int memory_address = get_memory_address(active_process, active_process->PC);
         for (k = 0; k < 6; k++) {
-            IR[k] = memory[active_process->EAR][k];
+            IR[k] = memory[memory_address][k];
         }
         
         // calculate integer equivalent of opcode chars
@@ -70,15 +72,7 @@ int main(int argc, const char * argv[]) {
         // make call to api to execute relevant function for opcode
         execute_opcode(opcode);
         
-        // only increment values if processes weren't switched in the 'halt' function
-        if(!external_switch) {
-            active_process->IC++;
-        
-            // increment PC for process, as well as the EAR accordingly
-            active_process->PC++;
-            active_process->EAR = active_process->BAR + active_process->PC;
-        }
-        // reset value
-        external_switch = 0;
+        active_process->IC++;
+        active_process->PC++;
     }
 }

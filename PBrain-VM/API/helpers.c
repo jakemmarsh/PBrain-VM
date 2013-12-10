@@ -14,13 +14,9 @@
 // INCLUDE HEADER FILE
 #include "api.h"
 
-// INCLUDE MAIN HEADER FILE TO ACCESS VARIABLES
+// INCLUDE MAIN HEADER AND FILEREADER HEADER FILES TO ACCESS VARIABLES
 #include "../main.h"
-
-// STORE LINE FROM PROGRAM INTO MEMORY
-void read_to_memory(int program_line, char input_line[7], int i) {
-    memory[program_line][i] = input_line[i];
-}
+#include "../FileReader/filereader.h"
 
 // EXTRACT NAMED PARAM FROM AN INSTRUCTION, SUCH AS A POINTER OR REGISTER NAME
 char * get_named_param(int start_position) {
@@ -50,7 +46,7 @@ int get_int_param(int start_position, int length) {
 }
 
 void switch_processes() {
-    int k;
+    int k, opcode;
     // if a process still exists to complete
     if(active_process->next) {
         // print out data about old process that is stopping
@@ -71,31 +67,101 @@ void switch_processes() {
         active_process = temp_next;
         ready_queue = active_process;
         
-        // set flag for main.c
-        external_switch = 1;
-        
         // print out data about new process that is beginning
         printf("NEW PROCESS ID: %d\n", active_process->idNumber);
         printf("NEW PROCESS TIME SLICE: %d\n", active_process->time_slice);
         // copy current line into the instruction register (IR) for printing
+        int memory_address = get_memory_address(active_process, active_process->PC);
         for (k = 0; k < 6; k++) {
-            IR[k] = memory[active_process->EAR][k];
+            IR[k] = memory[memory_address][k];
         }
         printf("NEW PROCESS FIRST INSTRUCTION: %s\n\n", IR);
-        int opcode = (int) (IR[0] - 48) * 10;
+        opcode = (int) (IR[0] - 48) * 10;
         opcode += (int) (IR[1] - 48);
         if(opcode == 99) {
             exit(0);
         }
     }
-    // otherwise, stop program
     else {
-        // print out data about old process that is stopping
+        // check if any files still need to be read into memory
+        for(int i = 0; i < 20; i++) {
+            if(waiting_queue[i] == 1) {
+                // read file
+                read_file(i);
+                
+                // reset flag
+                waiting_queue[i] = 0;
+                
+                // print out data about new process that is beginning
+                printf("NEW PROCESS ID: %d\n", active_process->idNumber);
+                printf("NEW PROCESS TIME SLICE: %d\n", active_process->time_slice);
+                // copy current line into the instruction register (IR) for printing
+                int memory_address = get_memory_address(active_process, active_process->PC);
+                for (k = 0; k < 6; k++) {
+                    IR[k] = memory[memory_address][k];
+                }
+                printf("NEW PROCESS FIRST INSTRUCTION: %s\n\n", IR);
+                
+                return;
+            }
+        }
+        
+        // if no processes remain at all, print out data about old process that is stopping and exit
         printf("\nLAST PROCESS ID: %d\n", active_process->idNumber);
         printf("LAST PROCESS TIME SLICE: %d\n", active_process->time_slice);
         printf("LAST PROCESS LAST INSTRUCTION: %s\n\n", IR);
         
         exit(0);
+    }
+}
+
+// find first available page in memory
+int find_new_page() {
+    // steps of 10 due to size of a page
+    for(int i = 0; i < 100; i += 10) {
+        if(master_memory_table[i] == -1) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+// find total number of pages that are available
+int get_number_available_pages() {
+    int count = 0;
+    // steps of 10 due to size of a page
+    for(int i = 0; i < 100; i += 10) {
+        if(master_memory_table[i] == -1) {
+            count++;
+        }
+    }
+    return count;
+}
+
+// calculate memory address from process' virtual address
+int get_memory_address(struct process *p, int line) {
+    int page = p->virtual_address[line][0],
+    offset = p->virtual_address[line][1],
+    memory_address = p->page_table[page]->base_address + offset;
+    
+    return memory_address;
+}
+
+// release all memory and pages held by a process
+void release_pages(struct process *p) {
+    // set page to available in master memory table
+    for(int i = 0; i < 10; i++) {
+        int page_base = p->page_table[i]->base_address;
+        master_memory_table[page_base] = -1;
+    }
+    
+    // overwrite contents of main memory previously used by process
+    for(int i = 0; i < p->program_lines; i++) {
+        int memory_address = get_memory_address(p, i);
+        
+        for(int j = 0; j < 6; j++) {
+            memory[memory_address][j] = 0;
+        }
     }
 }
 

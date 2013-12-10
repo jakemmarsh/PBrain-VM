@@ -12,8 +12,6 @@
 #ifndef API_INCLUDED
 #define API_INCLUDED
 
-extern int external_switch;
-
 
 // INSTRUCTION FUNCTIONS
 void load_pointer_immediate(char pointer[2], int value);
@@ -70,8 +68,6 @@ void system_wait(int pid, int sem_index);
 void system_signal(int pid, int sem_index);
 
 // HELPER FUNCTIONS
-void read_to_memory(int program_line, char input_line[7], int i);
-
 char * get_named_param(int start_position);
 int get_int_param(int start_position, int length);
 
@@ -87,5 +83,10 @@ struct process* get_prev_sem_queue(int pid, struct semaphore* semaphore);
 struct process* get_last_sem_queue(struct semaphore* semaphore);
 void remove_node_sem_queue(struct process* node, struct semaphore* semaphore);
 
+// PAGING SYSTEM FUNCTIONS
+int find_new_page();
+int get_number_available_pages();
+int get_memory_address(struct process *p, int line);
+void release_pages(struct process *p);
 
 #endif
