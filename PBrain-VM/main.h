@@ -62,6 +62,8 @@ int master_memory_table[100];
 // PROGRAM MEMORY
 extern char memory[1000][6];
 
+int memory_address;
+
 // WAITING QUEUE
 int waiting_queue[20];
 

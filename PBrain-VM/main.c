@@ -58,7 +58,7 @@ int main(int argc, const char * argv[]) {
         }
         
         // copy current line into the instruction register (IR)
-        int memory_address = get_memory_address(active_process, active_process->PC);
+        memory_address = get_memory_address(active_process, active_process->PC);
         for (k = 0; k < 6; k++) {
             IR[k] = memory[memory_address][k];
         }
@@ -73,7 +73,12 @@ int main(int argc, const char * argv[]) {
         // make call to api to execute relevant function for opcode
         execute_opcode(opcode);
         
-        active_process->IC++;
-        active_process->PC++;
+        if(!external_switch) {
+            active_process->IC++;
+            active_process->PC++;
+        }
+        
+        // reset flag
+        external_switch = 0;
     }
 }

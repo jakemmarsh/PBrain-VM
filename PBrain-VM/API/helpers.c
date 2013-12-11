@@ -46,6 +46,10 @@ int get_int_param(int start_position, int length) {
 }
 
 void switch_processes() {
+    // release pages if process is exiting
+    if(opcode == 99) {
+        release_pages(active_process);
+    }
     int k, opcode;
     // if a process still exists to complete
     if(active_process->next) {
@@ -82,6 +86,9 @@ void switch_processes() {
         if(opcode == 99 && !processes_remain()) {
             exit(0);
         }
+        
+        // set flag
+        external_switch = 1;
     }
     else if(processes_remain()) {
         // search for files that still need to be read into memory
@@ -113,7 +120,6 @@ void switch_processes() {
                     // print out data about new process that is beginning
                     printf("NEW PROCESS ID: %d\n", active_process->idNumber);
                     printf("NEW PROCESS TIME SLICE: %d\n", active_process->time_slice);
-                    // copy current line into the instruction register (IR) for printing
                     int memory_address = get_memory_address(active_process, active_process->PC);
                     for (k = 0; k < 6; k++) {
                         IR[k] = memory[memory_address][k];
@@ -121,12 +127,35 @@ void switch_processes() {
                     printf("NEW PROCESS FIRST INSTRUCTION: %s\n\n", IR);
                     opcode = (int) (IR[0] - 48) * 10;
                     opcode += (int) (IR[1] - 48);
+                    
+                    // set flag
+                    external_switch = 1;
                 }
                 else {
+                    printf("read file: %d\n", read_file(i));
                     // keep using same process if a new one was not successfully loaded
-                    active_process = old_process;
-                    active_process->next = NULL;
-                    ready_queue = active_process;
+                    if(active_process->PC < active_process->program_lines) {
+                        int memory_address = get_memory_address(active_process, active_process->PC);
+                        for (k = 0; k < 6; k++) {
+                            IR[k] = memory[memory_address][k];
+                        }
+                        opcode = (int) (IR[0] - 48) * 10;
+                        opcode += (int) (IR[1] - 48);
+                        
+                        if(opcode != 99) {
+                            active_process = old_process;
+                            active_process->next = NULL;
+                            ready_queue = active_process;
+                        }
+                        else {
+                            int check = processes_remain();
+                            printf("check: %d\n", check);
+                            //halt();
+                        }
+                    }
+                    else {
+                        exit(0);
+                    }
                 }
                 
                 return;
@@ -145,8 +174,7 @@ void switch_processes() {
 
 // find first available page in memory
 int find_new_page() {
-    // steps of 10 due to size of a page
-    for(int i = 0; i < 100; i += 10) {
+    for(int i = 0; i < 100; i++) {
         if(master_memory_table[i] == -1) {
             return i;
         }
@@ -157,8 +185,8 @@ int find_new_page() {
 // find total number of pages that are available
 int get_number_available_pages() {
     int count = 0;
-    // steps of 10 due to size of a page
-    for(int i = 0; i < 100; i += 10) {
+    
+    for(int i = 0; i < 100; i++) {
         if(master_memory_table[i] == -1) {
             count++;
         }
@@ -191,9 +219,8 @@ void release_pages(struct process *p) {
     // overwrite contents of main memory previously used by process
     for(int i = 0; i < p->program_lines; i++) {
         int memory_address = get_memory_address(p, i);
-        
         for(int j = 0; j < 6; j++) {
-            memory[memory_address][j] = 0;
+            memory[memory_address][j] = (char) 0;
         }
     }
 }
@@ -346,6 +373,10 @@ void execute_opcode(int opcode) {
             break;
         }
         default: {
+            active_process;
+            memory;
+            master_memory_table;
+            memory_address;
             printf("Invalid opcode: %d\n", opcode);
             break;
         }

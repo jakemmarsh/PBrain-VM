@@ -12,6 +12,7 @@
 #ifndef API_INCLUDED
 #define API_INCLUDED
 
+int external_switch;
 
 // INSTRUCTION FUNCTIONS
 void load_pointer_immediate(char pointer[2], int value);
