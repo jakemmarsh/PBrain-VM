@@ -373,10 +373,6 @@ void execute_opcode(int opcode) {
             break;
         }
         default: {
-            active_process;
-            memory;
-            master_memory_table;
-            memory_address;
             printf("Invalid opcode: %d\n", opcode);
             break;
         }
